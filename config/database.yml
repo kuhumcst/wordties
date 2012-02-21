@@ -4,8 +4,8 @@ development:
   adapter: postgresql
 #  adapter: jdbcpostgresql
 #  url: jdbc:postgresql://localhost:5432/andreord_development
-  database: andreord_development
-  username: postgres
+  database: andreord
+  username: andreord
   encoding: utf8
 
 # Warning: The database defined as "test" will be erased and

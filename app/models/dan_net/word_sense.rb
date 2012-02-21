@@ -6,7 +6,7 @@ module DanNet
     
     attr_accessor :heading_cands
 
-    named_scope(:with_lemma, lambda {|lemma|
+    scope(:with_lemma, lambda {|lemma|
       { :conditions => ['words.lemma = ?', lemma],
         :include => [:word]
       }

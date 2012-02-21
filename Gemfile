@@ -1,12 +1,20 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.2.1'
+
+# Assets group rails 3.2.*
+group :assets do
+  gem 'sass-rails', '~> 3.2.3' 
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'stringex'
+gem 'stringex', '~> 1.3.0'
+gem 'yui-compressor'
 # gem 'foreigner'
 # gem 'active_schema'
 
