@@ -1,65 +1,60 @@
-<!--Include YUI Loader: -->
-<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yuiloader/yuiloader-min.js"></script>
-
-<!--Use YUI Loader to bring in your other dependencies: -->
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
 <script type="text/javascript">
-function setupAutocomplete() {
-  YAHOO.example.BasicRemote = function() {
-    // Use an XHRDataSource
-    var oDS = new YAHOO.util.XHRDataSource("<%= word_suggestions_path %>");
-    // Set the responseType
-    oDS.responseType = YAHOO.util.XHRDataSource.TYPE_TEXT;
-    // Define the schema of the delimited results
-    oDS.responseSchema = {
-        recordDelim: "\n",
-        fieldDelim: "\t"
-    };
-    // Enable caching
-    oDS.maxCacheEntries = 5;
-
-    // Instantiate the AutoComplete
-    var oAC = new YAHOO.widget.AutoComplete("queryInput", "querySuggestionsContainer", oDS);
-    oAC.itemSelectEvent.subscribe(function(sType, aArgs) {
-      var myAC = aArgs[0]; // reference back to the AC instance
-      var elLI = aArgs[1]; // reference to the selected LI element
-      var oData = aArgs[2]; // object literal of selected item's result data
-      gotoWord(oData)
-    })
+ // Create a new YUI instance and populate it with the required modules.
+ YUI().use('event', 'datasource', 'autocomplete', 'autocomplete-highlighters', function (Y) {
+     var searchItemTemplate = 
+ 	"<div>" +
+ 	  "<span>{before}</span>" +
+      "<span style='font-weight: bold'>{query}</span>" +
+      "<span>{after}</span>" +
+    "</div>";
     
-     oAC.formatResult = function(oResultData, sQuery, sResultMatch) {
-        var matchIdx = sResultMatch.indexOf(sQuery)
-        var before = sResultMatch.substr(0, matchIdx)
-        var after  = sResultMatch.substr(matchIdx + sQuery.length)
-        return  "<div>" +
-                "<span>" + before + "</span>" +
-                "<span style='font-weight: bold'>" + sQuery + "</span>" +
-                "<span>" + after + "</span>" +
-                "</div>"
-    };
-
-
-return {
-        oDS: oDS,
-        oAC: oAC
-    };
-  }();
-}
-
-// Instantiate and configure YUI Loader:
-(function() {
-	var loader = new YAHOO.util.YUILoader({
-		base: "",
-		require: ["animation","autocomplete","connection","datasource"],
-		loadOptional: false,
-		combine: true,
-		filter: "MIN",
-		allowRollup: true,
-		onSuccess: function() {
-                  setupAutocomplete()
-		}
-	});
-
-// Load the files using the insert() method.
-loader.insert();
-})();
+    function selectSearchTerm(e) {
+    	e.preventDefault();
+    	Y.one('#queryInput').set('value', e.result.raw.term);
+    	gotoWord(e.result.raw.term);
+    	
+    	return false;
+    }
+    
+    function searchFormatter(query, results) {
+	   return Y.Array.map(results, function (result) {
+	    var searchResult = result.raw.term;
+	
+	    // Use string substitution to fill out the search template and
+	    // return an HTML string for this result.
+	    var matchIdx = searchResult.indexOf(query)
+	        
+	    return Y.Lang.sub(searchItemTemplate, {
+	    	query:	query,
+	    	before: searchResult.substr(0, matchIdx),
+	        after: 	searchResult.substr(matchIdx + query.length)
+	    });
+	  });
+	 }
+    // Add the yui3-skin-sam class to the body so the default
+    // AutoComplete widget skin will be applied.
+    Y.one('body').addClass('yui3-skin-sam');
+    
+    // Use an DataSource
+    var oDS = new Y.DataSource.IO({source: "<%= word_suggestions_path %>"});
+	oDS.plug({fn:Y.Plugin.DataSourceCache, cfg:{max:5}});
+    oDS.plug(Y.Plugin.DataSourceTextSchema, {
+   	 schema: {
+   	 	resultDelimiter: "\n",
+    	fieldDelimiter: "\t",
+    	resultFields: [{key:"term"}]
+   	 }
+    });
+    
+   // AutoComplete instance 
+   Y.one('#queryInput').plug(Y.Plugin.AutoComplete, {
+    resultHighlighter: 'wordMatch',
+    resultFormatter: searchFormatter,
+    requestTemplate: '?query={query}',
+    source: oDS
+   })
+   
+   Y.one('#queryInput').ac.on("select", selectSearchTerm);
+ });
 </script>
