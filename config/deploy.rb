@@ -9,7 +9,7 @@ set :application, "andreord.example.com"
 set :domain, "yourserver.example.com"
 
 set :scm, :git
-set :repository,  "git@github.com:andersjo/andreord-public.git"
+set :repository,  "git@github.com:meaton/andreord-public.git"
 
 set :deploy_via, :remote_cache
 
