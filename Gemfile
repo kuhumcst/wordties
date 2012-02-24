@@ -23,6 +23,9 @@ gem 'yui-compressor'
 # Use unicorn as the web server
 # gem 'unicorn'
 
+# Memoization
+gem 'call-me', '~> 0.0.2.2'
+
 # Deploy with Capistrano
 gem 'capistrano'
 

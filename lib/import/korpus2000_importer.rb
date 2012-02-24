@@ -1,9 +1,10 @@
 #coding: utf-8
 # coding: UTF-8
 require 'base64'
+require 'call-me/memoize'
+
 module Import
   class Korpus2000Importer
-    extend ActiveSupport::Memoizable
 
     DATA_DIR    = "#{RAILS_ROOT}/data/korpus2000"
     SEGMENT_DIR = "#{DATA_DIR}/segments"
@@ -60,6 +61,7 @@ module Import
 
     end
 
+    memoize
     def find_or_create_word_form_id(word_str, lemma_str)
       lemma_id = find_or_create_lemma_id(lemma_str)
       word_form = Corpora::WordForm.first(:conditions =>
@@ -69,17 +71,16 @@ module Import
       end
       word_form.id
     end
-    memoize :find_or_create_word_form_id
 
+    memoize
     def find_or_create_lemma_id(lemma_str)
       Corpora::Lemma.find_or_create_by_chars(lemma_str).id if lemma_str
     end
-    memoize :find_or_create_lemma_id
 
+    memoize
     def find_or_create_tag_id(tag_str)
       Corpora::PosTag.find_or_create_by_name(tag_str).id
     end
-    memoize :find_or_create_tag_id
 
     def tag_id_array(tag_str)
       if tag_str

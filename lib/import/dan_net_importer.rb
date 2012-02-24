@@ -1,9 +1,9 @@
 #coding: utf-8
 require 'fileutils'
+require 'call-me/memoize'
 
 module Import
   class DanNetImporter
-    extend ActiveSupport::Memoizable
     #include Hirb::Console
     DATA_DIR = "#{RAILS_ROOT}/lib/import/dan_net_data"
     DATA_FILE = "#{DATA_DIR}/dannet.zip"
@@ -274,17 +274,18 @@ SQL
       conn = ActiveRecord::Base.connection
       conn.execute(sql)
     end
-
+    
+    memoize
     def pos_tag_by_name(name)
       DanNet::PosTag.find_or_create_by_name(name)
     end
-    memoize :pos_tag_by_name
-    
+
+    memoize
     def feature_type_by_name(name)
       DanNet::FeatureType.find_or_create_by_name(name)
     end
-    memoize :feature_type_by_name
-
+    
+    memoize 
     def relation_type_by_name(name, alt_name)
       unless rel_type = DanNet::RelationType.find_by_name(name)
         rel_type = DanNet::RelationType.create!(
@@ -293,7 +294,6 @@ SQL
       end
       rel_type
     end
-    memoize :relation_type_by_name
 
     def file_content
       begin
