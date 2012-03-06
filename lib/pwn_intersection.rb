@@ -4,10 +4,12 @@ module PWN
   class Intersection
     include ActionView::Helpers::NumberHelper
     
-    # Directories and Files
+    # Directories and Output
     DATA_DIR    = "#{Rails.root}/lib/import/pwn_data/common_data"
     OUTPUT_FILE = "corepwn_intersect_freq_output.tsv"
-    FILES = %w{pwn_swe.tsv corewn-fiwn-sensekeymap-sortfreq.tsv eq_core.tsv core_est.tsv}
+    
+    # Data files: pwn_swe.tsv corewn-fiwn-sensekeymap-sortfreq.tsv eq_core.tsv core_est.tsv
+    FILES = %w{pwn_swe.tsv corewn-fiwn-sensekeymap-sortfreq.tsv eq_core.tsv core_est.tsv} 
     
     # Fields
     FORMAT = %w{pwd_id key_id name score freq}
@@ -88,7 +90,7 @@ module PWN
       end
             
       # generate new Hash and populate with values from file
-      pwn_h = Hash.new
+      pwn_h, pwn_n = Hash.new, Array.new
       pwn_target_rel.each {|t| 
         if pwn_h.has_key?(t[0])
           puts "Joining values (#{t}): #{pwn_h[t[0]]} and value(2): #{t[1]}"
@@ -102,7 +104,12 @@ module PWN
           pwn_h[t[0]] = t[1]
         end
       }    
-      
+
+       # find intersecting keys
+      if @pwn_list.length > 0
+          pwn_n = @pwn_list.select { |k,v| pwn_h.key?(k) }.keys
+      end
+        
       # merge data and calc combined freqs
       @pwn_list.merge!(pwn_h) { |key,v1,v2|
     	  puts "Merging values: #{v1} and value(2): #{v2}"
@@ -112,15 +119,19 @@ module PWN
   	     v1
         end
       }
-
-      # intersect against existing keys
-      if @pwn_list.length > 0
-          @pwn_list = @pwn_list.select { |k,v| pwn_h.key?(k) }
-      end
+      
+      if pwn_n.length > 0
+        new_pwn_list = Hash.new
+        pwn_n.each { |k|
+          new_pwn_list[k] = @pwn_list[k]
+        }
         
+        @pwn_list = new_pwn_list
+      end
+      
       # file count
       puts "total count: #{count}"
-      puts "hash size: #{pwn_h.length}"
+      puts "intersect array size: #{pwn_n.length}"
     end
     
     # parse the data
