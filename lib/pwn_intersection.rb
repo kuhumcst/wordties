@@ -7,7 +7,7 @@ module PWN
     # Directories and Files
     DATA_DIR    = "#{Rails.root}/lib/import/pwn_data/common_data"
     OUTPUT_FILE = "corepwn_intersect_freq_output.tsv"
-    FILES = %w{pwn_swe.tsv corewn-fiwn-sensekeymap-sortfreq.tsv eq_core.tsv}
+    FILES = %w{pwn_swe.tsv corewn-fiwn-sensekeymap-sortfreq.tsv eq_core.tsv core_est.tsv}
     
     # Fields
     FORMAT = %w{pwd_id key_id name score freq}
