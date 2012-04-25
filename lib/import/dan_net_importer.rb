@@ -1,11 +1,11 @@
-#coding: utf-8
+# encoding: UTF-8
 require 'fileutils'
 require 'call-me/memoize'
 
 module Import
   class DanNetImporter
     #include Hirb::Console
-    DATA_DIR = "#{RAILS_ROOT}/lib/import/dan_net_data"
+    DATA_DIR = "/home/seaton/git/andreord-public/lib/import/dan_net_data"
     DATA_FILE = "#{DATA_DIR}/dannet.zip"
     DATA_URL = "http://wordnet.dk/dannet/dannet/DanNet-2.1_csv.zip"
     UNITS = %w{synsets dummies synset_attributes words wordsenses relations}
@@ -14,9 +14,23 @@ module Import
       'mero' => 'holo', 'hypo'   => 'hypero'}
 
     def initialize
+      change_log(File.new('importer.out', 'w'))
       @connection = ActiveRecord::Base.connection
     end
 
+    def show_log
+      change_log(STDOUT)
+    end
+    
+    def hide_log
+      change_log(nil)
+    end
+    
+    def change_log(stream)
+      ActiveRecord::Base.logger = ::Logger.new(stream)
+      ActiveRecord::Base.clear_all_connections!
+    end
+    
     def run
       steps = [
         :download_file,
@@ -26,8 +40,8 @@ module Import
         :drop_mapping_table,
         :register_reverse_relation_types,
         :symmetize_reverse_relations,
-        :generate_word_sense_headings,
-        :generate_word_parts,
+        #:generate_word_sense_headings,
+        #:generate_word_parts
       ]
       ActiveRecord::Base.transaction do
         steps.each do |step|
@@ -297,7 +311,7 @@ SQL
 
     def file_content
       begin
-        file = File.open("#{DATA_DIR}/#{@unit}.csv", "r")
+        file = File.open("#{DATA_DIR}/#{@unit}.csv", "r:UTF-8") # read with UTF-8 encoding
         file.read
         #Iconv.conv("UTF-8", "ISO-8859-1", file.read)
       ensure
@@ -365,6 +379,23 @@ SQL
 
     def self.import
       DanNetImporter.new.run
+    end
+    
+    def self.import_last
+      DanNetImporter.new.generate_word_steps
+    end
+    
+    def generate_word_steps
+      steps = [
+              :generate_word_sense_headings,
+              :generate_word_parts
+            ]
+       ActiveRecord::Base.transaction do
+          steps.each do |step|
+            puts "running '#{step}' ... "
+            send(step)
+          end
+        end
     end
 
   end
