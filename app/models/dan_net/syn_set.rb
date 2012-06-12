@@ -3,7 +3,13 @@ module DanNet
   class SynSet < ActiveRecord::Base
     has_many :words, :through => :word_senses
     has_many :relations, {:class_name=>"DanNet::Relation", :foreign_key=>"syn_set_id" }
-    has_many :alignments
+    
+    has_many :alignments do
+      def with_through_source(source)
+        find_or_create_by_through_source(source)
+      end
+    end
+    
     has_many :relation_types, :through => :relations
     has_many :word_senses, {:class_name=>"DanNet::WordSense"} do
 
@@ -173,6 +179,5 @@ WITH RECURSIVE t(level,id,parent_id) as (
         text
       end
     end
-
   end
 end

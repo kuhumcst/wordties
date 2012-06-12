@@ -1,0 +1,37 @@
+en:
+    eq_has_synonym: eq_has_synonym
+    xpos_near_synonym: near synonym (part of speech)
+    role_patient: patient
+    concerns: concerns
+    used_for: used for
+    involved_agent: involved (agent)
+    made_by: made by
+    used_for_object: used for (object)
+    involved_patient: involved (patient)
+    near_synonym: near synonym
+    role_agent: agent
+    near_antonym: near antonym
+    involved_instrument: involved instrument
+    has_holonym: part of
+    has_hyperonym: hypernym
+    eq_has_hyponym: eq_has_hyponym
+    has_mero_part: has part
+    has_holo_part: is part of
+    eq_has_hyperonym: eq_has_hyperonym
+    has_holo_location: is located in
+    has_mero_madeof: is made of
+    has_holo_member: is member of
+    has_hyponym: hyponym
+    has_mero_member: has member
+    has_holo_madeof: substance holonym
+    has_mero_location: contains
+    domain: domain
+    relation_type_lang:
+      en: english
+      da: danish
+      fi: finnish
+    relation_type_symbols:
+      eq_synonym: →
+      eq_near_synonym: →
+      eq_has_hyperonym: ↑
+      eq_has_hyponym: ↓

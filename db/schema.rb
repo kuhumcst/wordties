@@ -11,81 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20120611152012) do
 
   create_table "alignments", :force => true do |t|
-    t.text    "source",             :null => false
+    t.text    "source_id",          :null => false
     t.text    "lemma",              :null => false
     t.text    "definition",         :null => false
     t.text    "synonyms",           :null => false
     t.text    "key",                :null => false
     t.integer "syn_set_id",         :null => false
     t.text    "relation_type_name", :null => false
+    t.string  "through_source"
+    t.integer "ext_syn_set_id"
   end
 
-  add_index "alignments", ["source", "key", "syn_set_id"], :name => "alignments_source_and_key_and_syn_set_id_uniq", :unique => true
-
-  create_table "c_corpora", :force => true do |t|
-    t.text "name"
-  end
-
-  create_table "c_korpus2000_sentences", :force => true do |t|
-    t.integer "sentence_id", :null => false
-    t.integer "preom",       :null => false
-    t.integer "bop",         :null => false
-    t.integer "eop",         :null => false
-    t.integer "genre",       :null => false
-    t.integer "agerel",      :null => false
-    t.integer "medium",      :null => false
-    t.integer "prody",       :null => false
-    t.integer "aspect",      :null => false
-  end
-
-  create_table "c_lemma_unigrams", :id => false, :force => true do |t|
-    t.integer "pick_id",  :null => false
-    t.integer "lemma_id", :null => false
-    t.decimal "freq_p",   :null => false
-  end
-
-  create_table "c_lemmas", :force => true do |t|
-    t.text "chars", :null => false
-  end
-
-  add_index "c_lemmas", ["chars"], :name => "c_lemmas_chars"
-
-  create_table "c_picks", :force => true do |t|
-    t.text    "name",  :null => false
-    t.integer "count", :null => false
-  end
-
-  create_table "c_pos_tags", :force => true do |t|
-    t.text "name", :null => false
-  end
-
-  create_table "c_sentences", :force => true do |t|
-    t.integer "corpus_id", :null => false
-  end
-
-  create_table "c_tokens", :id => false, :force => true do |t|
-    t.integer "sentence_id",                                   :null => false
-    t.integer "position",                                      :null => false
-    t.string  "pos_tags",     :limit => nil, :default => "{}", :null => false
-    t.integer "word_form_id",                                  :null => false
-    t.integer "lemma_id"
-  end
-
-  add_index "c_tokens", ["lemma_id"], :name => "c_tokens_lemma_id"
-  add_index "c_tokens", ["sentence_id"], :name => "c_tokens_sentence_id"
-  add_index "c_tokens", ["word_form_id"], :name => "c_tokens_word_form_id"
-
-  create_table "c_word_forms", :id => false, :force => true do |t|
-    t.integer "id",       :null => false
-    t.text    "chars",    :null => false
-    t.integer "lemma_id"
-  end
-
-  add_index "c_word_forms", ["chars", "lemma_id"], :name => "c_word_forms_chars_and_lemma_id"
-  add_index "c_word_forms", ["lemma_id"], :name => "c_word_forms_lemma_id"
+  add_index "alignments", ["source_id", "key", "syn_set_id", "relation_type_name", "ext_syn_set_id"], :name => "alignments_source_and_key_and_syn_set_id_uniq", :unique => true
 
   create_table "ddo_mappings", :force => true do |t|
     t.integer "ddo_id",        :limit => 8, :null => false
@@ -107,14 +47,14 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "features", ["syn_set_id"], :name => "dn_features_syn_set_id_key"
 
-  create_table "parole_freqs", :force => true do |t|
-    t.string  "pos"
-    t.string  "lemma"
-    t.integer "freq"
+  create_table "instances", :force => true do |t|
+    t.string   "uri"
+    t.datetime "last_uptime"
   end
 
-  create_table "pos_tags", :force => true do |t|
-    t.text "name", :null => false
+  create_table "pos_tags", :id => false, :force => true do |t|
+    t.integer "id",   :null => false
+    t.text    "name", :null => false
   end
 
   add_index "pos_tags", ["id"], :name => "dn_pos_tags_id_key", :unique => true
@@ -138,6 +78,12 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   add_index "relations", ["syn_set_id", "relation_type_id"], :name => "dn_relations_syn_set_id_and_relation_type_id"
+
+  create_table "sources", :id => false, :force => true do |t|
+    t.string  "source_id",   :null => false
+    t.integer "instance_id"
+    t.string  "lang"
+  end
 
   create_table "syn_sets", :id => false, :force => true do |t|
     t.integer "id",            :limit => 8, :null => false

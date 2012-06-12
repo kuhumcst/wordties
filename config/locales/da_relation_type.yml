@@ -1,5 +1,5 @@
 da:
-    eq_has_synonym: eq_has_synonym
+    eq_synonym: eq_synonym
     xpos_near_synonym: nærsynonymt (ordklasse)
     role_patient: udfører (patiens)
     concerns: vedrører
@@ -26,7 +26,12 @@ da:
     has_holo_madeof: indgår i
     has_mero_location: indeholder
     domain: fag
+    relation_type_lang:
+      en: engelsk
+      da: dansk
+      fi: finsk
     relation_type_symbols:
-      eq_has_synonym: →
+      eq_synonym: →
+      eq_near_synonym: →
       eq_has_hyperonym: ↑
       eq_has_hyponym: ↓

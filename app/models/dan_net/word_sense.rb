@@ -79,7 +79,7 @@ module DanNet
       word_senses.each do |ws|
         cands = [*disc.call(ws)]
         cands.each {|cand| candidate_map[cand] += 1 }
-        ws.heading_cands += cands
+        ws.heading_cands = cands
       end
     end
     

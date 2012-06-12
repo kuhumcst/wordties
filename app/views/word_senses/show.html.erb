@@ -41,17 +41,36 @@
         <% end %>
     </div>
 
-<% unless @alignments.empty? %>
+<% unless @alignments_wordnet.empty? %>
     <div class="analysisBox alignment">
         <h3>Alignering</h3>
         Det engelske <a href="http://wordnet.princeton.edu/">Wordnet</a> har begreber der svarer til det danske:</p>
         <ul class="list">
-           <% for alignment in @alignments %>
+           <% for alignment in @alignments_wordnet %>
             <li>
                 <span style="font-size: 1.2em; padding-right: 0.3em" alt='<%= alignment.relation_type_name %>'>
                     <%= t(alignment.relation_type_name, :scope => :relation_type_symbols) %>
                 </span>
-                <%= alignment.synonyms.to_sentence %>: <em><%= alignment.definition %></em></li>
+                <em>(<%= t(alignment.source.lang, :scope => :relation_type_lang).capitalize %>)</em>
+                <%= alignment.synonyms.to_sentence %>: <em><%= alignment.definition %></em>
+            </li>
+           <% end %>
+           <% # Hide block and user can open to show other language translations 
+           	  # Later work to ext link to other AndreOrd instance (new linking table)
+           %>
+           <% for alignment in @alignments_through %>
+             <li>
+           		<span style="font-size: 1.2em; padding-left: 1.5em; padding-right: 0.3em" alt='<%= alignment.relation_type_name %>'>
+                    <%= t(alignment.relation_type_name, :scope => :relation_type_symbols).capitalize %>
+                </span>
+                <em>(<%= t(alignment.source.lang, :scope => :relation_type_lang).capitalize %>)</em>
+                <% if !alignment.source.instance.uri.empty? %>
+                	<a href="<%= alignment.source.instance.uri%>flertydighed/<%= alignment.synonyms[0] %>" target="_blank"><%= alignment.synonyms.to_sentence %></a>
+                <% else %>
+                	<%= alignment.synonyms.to_sentence %>
+                <% end %>
+                : <em><%= alignment.definition %></em>
+             </li>
            <% end %>
         </ul>
     </div>

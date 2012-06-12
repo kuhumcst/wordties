@@ -8,7 +8,8 @@ class WordSensesController < ApplicationController
       redirect_to ord_path(@sense), :status=> :moved_permanently
     end
     @syn_set  = @sense.syn_set
-    @alignments = @syn_set.alignments
+    @alignments_wordnet = @syn_set.alignments.where({:through_source => nil})
+    @alignments_through = @syn_set.alignments.where({:through_source => "wordnet30"}).sort_by(&:source)
     @title = "#{@sense.heading} – #{@syn_set.gloss}"
     @synonyms = @sense.synonyms
     @hyponyms = @syn_set.hyponyms.sort_by(&:pretty_label)
