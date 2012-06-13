@@ -21,7 +21,7 @@ Andreord::Application.routes.draw do
   resources :sitemaps
   resources :synonyms
   match 'sitemap_index.xml' => 'sitemap_index#show', :as => :sitemap_index
-  match '/' => 'word_senses#index'
+  root :to => 'word_senses#index'
 #  match '/:controller(/:action(/:id))'
 
   # The priority is based upon order of creation:
