@@ -6,13 +6,13 @@ from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.schema import Sequence
 from optparse import OptionParser
 
-# Options Parser
+# Options Parser (note: deprecated since 2.7)
 parser = OptionParser()
 parser.add_option("-f", "--file", dest="filename", help="file to parse", metavar="FILE")
 parser.add_option("-s", "--source", dest="source", help="defined alignment source", metavar="SOURCE", default="wordnet30")
 parser.add_option("-t", "--through", dest="through", help="defined through translation", metavar="SOURCE", default=None)
 parser.add_option("-n", "--factor", dest="factor", help="syn_set factor for database", metavar="FACTOR", default=1)
-parser.add_option("-m", "--factor2", dest="parent_factor", help="parent syn_set factor for database", metavar="FACTOR", default=1000)
+parser.add_option("-m", "--factor2", dest="parent_factor", help="parent syn_set factor for database", metavar="FACTOR", default=1)
 parser.add_option("-v", "--verbose", action="store_true", dest="verbose")
 
 # FILENAME
@@ -95,7 +95,7 @@ for line in f.readlines():
                                            synonyms=lemmas,
                                            key=target,
                                            relation_type_name=relation,
-					   syn_set_id=int(source)*options.factor, 
+					   syn_set_id=int(source)*int(options.factor), 
 					   through_source=options.through,
 					   ext_syn_set_id=ext_syn_set_id
 					   )
