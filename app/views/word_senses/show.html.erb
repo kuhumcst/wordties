@@ -65,7 +65,7 @@
                 </span>
                 <em>(<%= t(alignment.source.lang, :scope => :relation_type_lang).capitalize %>)</em>
                 <% if !alignment.source.instance.uri.empty? %>
-                	<a href="<%= alignment.source.instance.uri%>flertydighed/<%= alignment.synonyms[0] %>" target="_blank"><%= alignment.synonyms.to_sentence %></a>
+                	<a href="<%= alignment.source.instance.uri%>synset/<%= alignment.ext_syn_set_id %>" target="_blank"><%= alignment.synonyms.to_sentence %></a>
                 <% else %>
                 	<%= alignment.synonyms.to_sentence %>
                 <% end %>
