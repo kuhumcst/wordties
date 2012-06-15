@@ -1,5 +1,4 @@
-#coding: utf-8
-# coding: UTF-8
+# encoding: UTF-8
 require 'base64'
 require 'call-me/memoize'
 
