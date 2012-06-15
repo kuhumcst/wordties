@@ -11,13 +11,13 @@ Andreord::Application.routes.draw do
     :controller => 'word_senses'
   resources :den_danske_ordbog, 
     :controller => 'ddo_mappings'
-  match 'find/:query' => 'word_senses#search', :as => :find_heading
-  match 'synset/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
-  match 'begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
-  match 'disambiguation/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
-  match 'flertydighed/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
-  match 'spelling/:query' => 'wrong_spellings#show', :as => :correct_spelling
-  match 'stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling
+  match '/find/:query' => 'word_senses#search', :as => :find_heading
+  match '/synset/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
+  match '/begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
+  match '/disambiguation/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
+  match '/flertydighed/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
+  match '/spelling/:query' => 'wrong_spellings#show', :as => :correct_spelling
+  match '/stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling
   resources :sitemaps
   resources :synonyms
   match 'sitemap_index.xml' => 'sitemap_index#show', :as => :sitemap_index
