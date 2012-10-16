@@ -5,7 +5,7 @@ class DdoMappingsController < ApplicationController
     if @ddo_mapping
       redirect_to ord_path(@ddo_mapping.word_sense), :status => :moved_permanently
     else
-      render :text => "Ordet findes ikke i DanNet", :status => :not_found
+      render :text => t(:not_found_notice, :wordnet => "DanNet"), :status => :not_found
     end
   end
 end
