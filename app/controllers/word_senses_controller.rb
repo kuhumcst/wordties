@@ -48,8 +48,9 @@ class WordSensesController < ApplicationController
     @related_syn_sets = Hash.new {|h,k| h[k] = {} }
     graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
       syn_sets.each do |syn_set|
+	link = !syn_set.internal? ? ord_path(syn_set.word_senses.preferred) : ''
         @related_syn_sets[t(rel_type.name)][syn_set.pretty_label] = {
-          'link'     => ord_path(syn_set.word_senses.preferred),
+          'link'     => link,
           'synonyms' => syn_set.words.map(&:lemma)*',',
           'gloss'    => syn_set.gloss
         }
