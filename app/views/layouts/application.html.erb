@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="google-site-verification" content="mHzS4U61Xdcd_92xVGJY_vQ7Ws370a0PvljDfAvfULU" />
-        <title><%= h(@title||"Andre ord") %></title>
+        <title><%= h(@title||t(:title, :scope => :application)) %></title>
         <link  href="//fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css" >
         <%= stylesheet_link_tag "application" %>
         <%= javascript_include_tag "application" %>
@@ -18,11 +18,11 @@
                       <input id="queryInput" type="text"/>
                       <div id="querySuggestionsContainer"></div>
                   </div>
-                  <%= submit_tag "Slå op" %>
+                  <%= submit_tag t(:search_btn, :scope => :application) %>
                 <% end -%> 
             </div>
             <div id="logo">
-              <a href="/">Andre ord</a>
+              <%= link_to(t(:title, :scope => :application), '/') %>
             </div>
             <br style="height:150px; clear:both"/>
           </div>
@@ -36,9 +36,9 @@
               <%= yield %>
           </div>
           <div id="footer">
-              <%= link_to 'andreord.dk', '/' %> er faldet ud af ærmet på 
+              <%= link_to(t(:title, :scope => :application), '/') %> <%= t(:made_by, :scope => :application) %>
               <%= mail_to 'anders@johannsen.com', 'Anders Johannsen', :encode => 'javascript' %><br/>
-              Siden præsenterer data fra <%= link_to 'DanNet', 'http://wordnet.dk' %>
+              <%= t(:data_from, :scope => :application) %> <%= link_to 'DanNet', 'http://wordnet.dk' %>
           </div>
           <%= render :partial => 'layouts/query_autocompleter' %>
     </div>

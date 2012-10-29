@@ -1,0 +1,12 @@
+en:
+  shortest_paths:
+    ShortestPath: Shortest path between synsets
+    AmbiguousConcept: Ambiguous concept
+    Registered: 
+      one: "Several meanings are registrered for the synset <em>%{param}</em>"
+      other: "Several meanings are registrered for the synsets <em>%{src}</em> og <em>%{dst}</em>"
+    Path: Path
+    PathCount: "There are %{count} steps between the synsets"
+    Unrelated: Unfortunately, the synsets are not connected
+    From: From
+    To: To

@@ -4,7 +4,6 @@ da:
     2ndOrderEntity: Andenordensentitet
     1stOrderEntity: Førsteordensentitet
     Mental: Mental
-    Purpose: Formål
     Domain: Domæne
     Time: Tid
     Quantity: Kvantitet
@@ -14,7 +13,6 @@ da:
     Social: Social
     Living: Levende
     Natural: Natur
-    Object: Objekt
     Artifact: Artefakt
     Object: Objekt
     Dynamic: Dynamisk
@@ -39,7 +37,6 @@ da:
     Static: Statisk
     Human: Menneskelig
     LanguageRepresentation: Sprogrepræsentation
-    Physical: Fysisk
     Colour: Farve
     Form: Form
     Stimulating: Stimulerende

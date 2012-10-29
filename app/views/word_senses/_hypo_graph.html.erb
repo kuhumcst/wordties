@@ -78,6 +78,6 @@ vis.render()
     </script>
   </div>
   <div class="graphSelectBox">
-    Vis <a href="#relationer">relationer</a> eller <strong>begrebshierarki</strong>
+    <%= raw t('graphs.view_select.second', :href => link_to(t('graphs.relations'), '#relationer'), :current => t('graphs.concept_hierarchy')) %>
   </div>
 </div>

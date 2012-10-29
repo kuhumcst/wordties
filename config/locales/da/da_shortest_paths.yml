@@ -1,0 +1,12 @@
+da:
+  shortest_paths:
+    ShortestPath: Korteste vej mellem begreber
+    AmbiguousConcept: Flertydigt begreb 
+    Registered:
+      one: "Vi har registreret flere betydninger for begrebet <em>%{param}</em>"
+      other: "Vi har registreret flere betydninger for begreberne <em>%{src}</em> og <em>%{dst}</em>"
+    Path: Sti
+    PathCount: "Der er %{count} trin mellem begreberne"
+    Unrelated: Desværre, begreberne hænger ikke sammen
+    From: Fra
+    To: Til

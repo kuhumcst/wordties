@@ -1,7 +1,7 @@
 <h2><%= @query %></h2>
 
-<h3>Vælg betydning</h3>
-<p>Der er registreret flere betydninger for <em><%= @query %></em>. Vælg en</p>
+<h3><%=t :select_sense, :scope => :disambiguations %></h3>
+<p><%= raw(t(:more_senses, :scope => :disambiguations, :query => @query))%>. <%=t :choose_one, :scope => :disambiguations %></p>
 <ol>
     <%= render :partial => 'sense', :collection => @senses  %>
 </ol>

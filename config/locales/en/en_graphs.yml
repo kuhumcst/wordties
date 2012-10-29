@@ -1,0 +1,7 @@
+en:
+  graphs:
+    relations: relations
+    concept_hierarchy: concept hierarchy
+    view_select:
+      first: "View <strong>%{current}</strong> or %{href}"
+      second: "View %{href} or <strong>%{current}</strong>"

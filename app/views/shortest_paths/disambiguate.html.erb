@@ -1,12 +1,12 @@
-<h2>Korteste vej mellem begreber</h2>
-<h3>Flertydigt begreb</h3>
-<p>Vi har registreret flere betydninger for
+<h2><%=t :ShortestPath, :scope => :shortest_paths %></h2>
+<h3><%=t :AmbiguousConcept, :scope => :shortest_paths %></h3>
+<p>
 <% if [@src_senses,@dst_senses].all? {|s| s.size > 1 } %>
-    begreberne <em><%= params[:src] %></em> og <em><%= params[:dst] %></em></p>
+    <%= raw(t(:Registered, :scope => :shortest_paths, :count => @src_senses.size, :src => params[:src], :dst => params[:dst])) %></p>
 <% elsif @src_senses.size > 1 %>
-    begrebet <em><%= params[:src] %></em>
+    <%= raw(t(:Registered, :scope => :shortest_paths, :count => 1, :param => params[:src])) %>
 <% else %>
-    begrebet <em><%= params[:dst] %></em>
+    <%= raw(t(:Registered, :scope => :shortest_paths, :count => 1, :param => params[:dst])) %>
 <% end %>
 <%= render :partial => 'split_view',
     :locals => {    :src_senses => @src_senses,

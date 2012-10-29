@@ -1,6 +1,6 @@
 <% if @hyponyms.length > 5 %>
     <div class="analysisBox hyponyms">
-        <h3>Underbegreber</h3>
+        <h3><%= t(:sub_concepts, :scope => 'word_senses.headings').capitalize %></h3>
         <div class="list capped">
             <ul>
               <% for hyponym in @hyponyms %>

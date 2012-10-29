@@ -1,0 +1,19 @@
+da:
+  word_senses:
+    wordnet_alignment: "Det %{aligned_wordnets} har begreber der svarer til det %{current_wordnet}"
+    super_concept_minmax: 
+      one: "%{lemma} har mindst 1 overbegreb %{min_path} og maximum %{max_count} %{max_path}"
+      other: "%{lemma} har mindst %{count} overbegreber %{min_path} og maximum %{max_count} %{max_path}"
+    super_concept_top: 
+      zero: "%{lemma} har ingen overbegreb"
+      one: "%{lemma} har 1 overbegreb %{path}"
+      other: "%{lemma} har %{count} overbegreber %{path}"
+    headings:
+      syn_collection: synonymer
+      sentence_use: i en sætning
+      location: placering
+      sub_concepts: underbegreber
+      alignment: alignering
+      features: egenskaber
+  
+  

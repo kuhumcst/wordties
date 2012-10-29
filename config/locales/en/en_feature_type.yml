@@ -1,0 +1,63 @@
+en:
+    Underspecified: Underspecified
+    3rdOrderEntity: 3rd order entity
+    2ndOrderEntity: 2nd order entity
+    1stOrderEntity: 1st order entity
+    Mental: Mental
+    Domain: Domaine
+    Time: Time
+    Quantity: Quantity
+    Purpose: Purpose
+    Manner: Manner
+    Property: Property
+    Social: Social
+    Living: Living
+    Natural: Natural
+    Artifact: Artifact
+    Object: Object
+    Dynamic: Dynamic
+    Agentive: Agentive
+    Location: Location
+    Phenomenal: Phenomenal
+    BoundedEvent: Bounded event
+    UnboundedEvent: Unbounded event
+    Cause: Cause
+    Group: Group
+    Part: Part
+    Place: Place
+    Imagerepresentation: Image representation
+    Substance: Substance
+    Communication: Communication
+    Social: Social
+    Institution: Institution
+    Experience: Experience
+    Condition: Condition
+    Representation: Representation
+    Static: Static
+    Human: Human
+    LanguageRepresentation: Language representation
+    Physical: Physical
+    Colour: Colour
+    Form: Form
+    Stimulating: Stimulating
+    Existence: Existence
+    Possession: Possession
+    Relation: Relation
+    Furniture: Furniture
+    Building: Building
+    Instrument: Instrument
+    Container: Container
+    Garment: Garment
+    Vehicle: Vehicle
+    Comestible: Comestible
+    Animal: Animal
+    Plant: Plant
+    Liquid: Liquid
+    Form: Form
+    Soci: Soci
+    Artwork: Artwork
+    Occupation: Beskæftigelse
+    MoneyRepresentation: Money representation
+    Covering: Covering
+    GeopoliticalPlace: Geopolitical place
+    BodyPart: Body part

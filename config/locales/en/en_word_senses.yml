@@ -1,0 +1,17 @@
+en:
+  word_senses:
+    wordnet_alignment: "The %{aligned_wordnets} has concepts that correspond to the %{current_wordnet}"
+    super_concept_minmax: 
+      one: "%{lemma} has at least 1 super-concept %{min_path} and a maximum of %{max_count} %{max_path}"
+      other: "%{lemma} has at least %{count} super-concept %{min_path} and a maximum of %{max_count} %{max_path}"
+    super_concept_top:
+      zero: "%{lemma} has no super-concept"
+      one: "%{lemma} has 1 super-concept %{path}"
+      other: "%{lemma} has %{count} super-concepts %{path}"
+    headings:
+      syn_collection: synonyms
+      sentence_use: in a phrase
+      location: placement
+      sub_concepts: sub-concepts
+      alignment: alignment
+      features: features

@@ -1,6 +1,5 @@
 da:
   saved: Gemt!
-  not_found_notice: Ordet findes ikke i %{wordnet}
   date:
     abbr_day_names:
     - søn

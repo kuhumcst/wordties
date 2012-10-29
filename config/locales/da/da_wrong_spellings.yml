@@ -1,0 +1,5 @@
+da:
+  wrong_spellings:
+    not_found_notice: "Ordet findes ikke i %{wordnet}"
+    check_spelling: Kontrollerer evt. stavningen
+    searched_for: "Du søgte på <em>%{query}</em>"

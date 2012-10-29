@@ -1,0 +1,7 @@
+da:
+  graphs:
+    relations: relationer
+    concept_hierarchy: begrebshierarki
+    view_select:
+      first: "Vis <strong>%{current}</strong> eller %{href}"
+      second: "Vis %{href} eller <strong>%{current}</strong>"

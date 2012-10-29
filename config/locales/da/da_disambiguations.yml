@@ -1,0 +1,5 @@
+da:
+    disambiguations:
+      choose_one: Vælg en 
+      select_sense: Vælg betydning
+      more_senses: "Der er registreret flere betydninger for <em>%{query}</em>."

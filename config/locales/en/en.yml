@@ -3,7 +3,6 @@
 
 en:
   saved: Saved!
-  not_found_notice: Word not found in %{wordnet}
   date:
     abbr_day_names:
     - Sun

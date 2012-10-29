@@ -1,5 +1,5 @@
-<h3>Ordet blev ikke fundet</h3>
+<h3><%=t :not_found_notice, :scope => :wrong_spellings, :wordnet => t(:wordnet, :scope => :application) %></h3>
 <p>
-  Du søgte på <em><%= h(@query) %></em>.
-  Kontrollerer evt. stavningen.
+  <%= raw(t(:searched_for, :scope => :wrong_spellings, :query => h(@query))) %>.
+  <%=t :check_spelling, :scope => :wrong_spellings %>
 </p>
