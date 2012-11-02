@@ -43,6 +43,26 @@ class HyponymTree
     h
   end
 
+  def hypo_count_tree(level=tree)
+    a = Array.new
+    level.each do |key,val|
+      h = {}
+      if key == 'rest'
+        h['name'] = key
+	h['hyponym_count'] = val
+      else
+	if val.is_a?(Hash)
+          h['children'] = hypo_count_tree(val)
+	end
+	h['id'] = key.id.to_s
+	h['name'] = key.pretty_label
+	h['hyponym_count'] = key['hyponym_count']
+      end
+      a.push(h)
+    end
+    a
+  end
+
   private
   def walk_hypo_tree(current, by_parent_id)
     level_map = {}
