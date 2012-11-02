@@ -24,5 +24,11 @@ module WordSensesHelper
     end
     h.to_json.html_safe
   end
-
+  
+  def hyponym_tree_to_json(tree, lemma)
+    h = {}
+    h['name'] = lemma
+    h['children'] = tree
+    h.to_json.html_safe
+  end
 end
