@@ -1,0 +1,82 @@
+<style type="text/css">
+		#hypoGraph {
+		  width: 800px;
+		  height: 730px;
+		  margin-top: 1em;
+		}
+		
+		#hypoGraph .center {
+		  width: 700px;
+		  margin: auto;
+		}
+		
+		.hover {
+		  cursor: hand;
+		}
+		
+		.arc {
+		  cursor: pointer;
+		}
+</style>
+
+<div id="hypoGraph" style="display: none">
+	<div class="graphSelectBox">
+		<%= raw t('graphs.view_select.second', :href => link_to(t('graphs.relations'), '#relationer'), :current => t('graphs.concept_hierarchy')) %>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+<% htree = @syn_set.hyponyms_below.filtered_by_level([0, 35, *1.upto(5).map {|i| i*100 }], 6) %>
+var tree = <%= htree.hypo_count_tree.to_json.html_safe %>,
+    tree2 = <%= htree.id_tree.to_json.html_safe %>,
+    data = <%= hyponym_tree_to_json(htree.hypo_count_tree, @sense.word.lemma) %>,
+    lemma = "<%= @sense.word.lemma %>";
+
+var w = 700, 
+	h = 700,
+	radius = Math.min(w,h)/2,
+	catColors = d3.scale.category20c(),
+	hyponymCount = <%= @syn_set.hyponym_count %>;
+	
+var svg = d3.select("#hypoGraph").append("svg").attr("width", w).attr("height", h).append("g").attr("transform", "translate(" + w/2 + "," + h/2 + ")");
+
+var partition = d3.layout.partition()
+ 	.size([2 * Math.PI, radius * radius])
+ 	.value(function(d) { return d.hyponym_count; });
+
+var arc = d3.svg.arc()
+			.startAngle(function(d) { return d.x; })
+			.endAngle(function(d) { return d.x + d.dx; })
+			.innerRadius(function(d) { return Math.sqrt(d.y); })
+			.outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+
+var nodes = partition.nodes(data);
+
+svg.selectAll("path")
+	.data(nodes)
+	.enter()
+	.append("path")
+		.attr("d", arc)
+		.attr("fill-rule", "evenodd")
+		.style("stroke", "#fff")
+		.style("fill", function(d) { return catColors(d.depth); })
+		.attr("fill-opacity", function(d) { return (d.name == "rest") ? 0.4 : 1; }) // apply alpha for 'rest'
+		.on("click", function(d) {
+      		if (d.name != 'rest')
+        		document.location = d.link;
+    	})
+    	.on("mouseover", function() { d3.select(this).attr("class", "arc hover")})
+     	.on("mouseout", function() { d3.select(this).attr("class", "arc") })
+    	/*.append("text")
+    		.text(function(d) { return (d.name != 'rest') ? d.name : null })
+    		.style("font", function(d) { d.parent ? "13px 'Arvo'" : "bold 16px 'Arvo'" })
+    		.attr("visibility", function(d) { return (d.angle * d.outerRadius >= 6) ? "visible" : "hidden"; })*/
+    	.append("title").text(function(d) {
+      		var ofTotal = parseFloat(d.hyponym_count) / hyponymCount
+      		return (ofTotal*100).toFixed(1) + " % (" + d.hyponym_count + " / " + hyponymCount + " )"
+    	});
+    	
+var text = svg.selectAll("text").data(nodes);
+
+</script>
