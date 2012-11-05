@@ -149,7 +149,7 @@ function hypo_graph(data, hyponym_count) {
 	  	.attr("transform", function(d) {
 	    	if(d.depth == 0) return "translate(0, 0)";
 	  		var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
-	    	return "rotate(" + angle + ")translate(" + (y(d.y) + padding*2) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+	    	return "rotate(" + angle + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
 	  	})
 	  	.text(function(d) { return (d.name != "rest") ? d.name : ""; })
 		.attr("visibility", function(d) { return (((y(d.y)*x(d.dx) >= 6) && d.name != 'rest') || d.y == 0) ? "visible" : "hidden"; })
