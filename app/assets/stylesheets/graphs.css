@@ -1,0 +1,44 @@
+/* Common graph styles*/
+#relGraph .label { font-size: 11px; }
+#relGraph .label, #hypoGraph .label { cursor: pointer; }
+#relGraph svg, #hypoGraph svg {
+  font-family: 'Arvo';
+  font-weight: normal;
+  color: #000;
+}
+/* Relation graph */
+#relGraph {
+  width: 800px;
+  height: 650px;
+}
+#relGraph .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+#relGraph .root-node-label {
+ font-size: 24px;
+ font-family: 'Arvo', sans-serif;
+ text-shadow: 0.1em 0.1em 0.1em rgba(0,0,0,.15);
+ vertical-align: center;
+}
+#relGraph .large { font-size: 36px; }
+#relGraph .legend-container { 
+  font-size: 11px;
+  font-family: 'Arvo';
+}
+#relGraph .legend { font-size: 13px; }
+
+/* Hyponym graph */
+#hypoGraph {
+  height: 700px;
+  margin-bottom: 30px;
+  margin-top: 1em;
+}
+#hypoGraph .center {
+  width: 700px;
+  margin: auto;
+}
+#hypoGraph .arc { cursor: pointer; }
+#hypoGraph .label, #hypoGraph .label-nolink { font-size: 13px; }
+#hypoGraph .large { font-size: 16px; font-weight: bold }

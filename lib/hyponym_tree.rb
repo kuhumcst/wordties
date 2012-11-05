@@ -1,4 +1,5 @@
 class HyponymTree
+  include Rails.application.routes.url_helpers
   attr_reader :syn_sets
   def initialize(syn_sets)
     @syn_sets = syn_sets
@@ -35,7 +36,7 @@ class HyponymTree
     h = {}
     level.each do |key,val|
       if key == 'rest'
-        h[key] = val
+        h[key] = val[0]
       else
         h[key.id] = val.is_a?(Hash) ? id_tree(val) : val.id.to_s
       end
@@ -45,11 +46,13 @@ class HyponymTree
 
   def hypo_count_tree(level=tree)
     a = Array.new
+    
     level.each do |key,val|
       h = {}
       if key == 'rest'
         h['name'] = key
-	h['hyponym_count'] = val
+	h['hyponym_count'] = val[0]
+	h['parent_id'] = val[1]
       else
 	if val.is_a?(Hash)
           h['children'] = hypo_count_tree(val)
@@ -57,6 +60,8 @@ class HyponymTree
 	h['id'] = key.id.to_s
 	h['name'] = key.pretty_label
 	h['hyponym_count'] = key['hyponym_count']
+	h['parent_id'] = key['parent_id']
+	h['link'] = ord_path(key.word_senses.first, :anchor => "begreber")
       end
       a.push(h)
     end
@@ -74,9 +79,8 @@ class HyponymTree
       end
     end
     other_count = current.hyponym_count - by_parent_id[current.id].map(&:hyponym_count).sum
-    level_map['rest'] = other_count if other_count > 0
+    level_map['rest'] = [other_count, current.id] if other_count > 0
     level_map
   end
-
   
 end

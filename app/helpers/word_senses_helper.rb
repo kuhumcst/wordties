@@ -29,6 +29,8 @@ module WordSensesHelper
     h = {}
     h['name'] = lemma
     h['children'] = tree
+    h['link'] = '#begreber'
+
     h.to_json.html_safe
   end
 end

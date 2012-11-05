@@ -45,17 +45,38 @@ class WordSensesController < ApplicationController
 
   def bind_related_syn_sets
     graph = DanNet::WordSenseGraph.new(@sense)
-    @related_syn_sets = Hash.new {|h,k| h[k] = {} }
+    @related_syn_sets = Hash.new
+    @related_syn_sets['name'] = @sense.word.lemma
+    @related_syn_sets['link'] = ''
+    @related_syn_sets['children'] = Array.new
     graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
       syn_sets.each do |syn_set|
 	link = !syn_set.internal? ? ord_path(syn_set.word_senses.preferred) : ''
-        @related_syn_sets[t(rel_type.name)][syn_set.pretty_label] = {
+	@related_syn_sets['children'].push({	
+	  'name'     => syn_set.pretty_label,
+          'link'     => link,
+          'synonyms' => syn_set.words.map(&:lemma)*',',
+          'gloss'    => syn_set.gloss,
+	  'rel_type' => t(rel_type.name)
+        })
+      end
+    end
+  end
+
+  def bind_related_syn_sets_protovis
+    graph = DanNet::WordSenseGraph.new(@sense)
+    related_syn_sets = Hash.new {|h,k| h[k] = {} }
+    graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
+      syn_sets.each do |syn_set|
+	link = !syn_set.internal? ? ord_path(syn_set.word_senses.preferred) : ''
+        related_syn_sets[t(rel_type.name)][syn_set.pretty_label] = {
           'link'     => link,
           'synonyms' => syn_set.words.map(&:lemma)*',',
           'gloss'    => syn_set.gloss
         }
       end
     end
+    related_syn_sets
   end
 
 end
