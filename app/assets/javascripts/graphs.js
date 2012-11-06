@@ -12,7 +12,7 @@ function rel_graph(data, labels) {
 	var container = svg.append("g").attr("class", "container").attr("transform", "translate(" + (w/2 - 75) + ", " + (h/2 + 30) + ")");
 	
 	// Tree layout
-	var tree = d3.layout.tree().size([360, r]).separation(function(a, b) { return ((a.parent == b.parent) && (a.rel_type == b.rel_type) ? 1 : 2) / a.depth; }); // leaf nodes at same (one) level
+	var tree = d3.layout.cluster().size([360, r]).separation(function(a, b) { return ((a.parent == b.parent) && (a.rel_type == b.rel_type) ? 1 : 2) / a.depth; }); // leaf nodes at same (one) level
 	var nodes = tree.nodes(data);
 	var links = tree.links(nodes);
 	
