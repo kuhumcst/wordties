@@ -63,7 +63,9 @@ class HyponymTree
 	h['name'] = key.pretty_label
 	h['hyponym_count'] = key['hyponym_count']
 	h['parent_id'] = key['parent_id']
-	h['link'] = ord_url(key.word_senses.first, :anchor => "begreber")
+	h['link'] = ord_path(key.word_senses.first, :anchor => "begreber")
+########Use for custom sub-dir path config
+#	h['link'] = ord_url(key.word_senses.first, :anchor => "begreber")
       end
       a.push(h)
     end
