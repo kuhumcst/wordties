@@ -2,7 +2,7 @@
 //= require effects
 //= require dragdrop
 //= require controls
-//= require protovis-r3.2
+//= require d3.v2
 //= require_tree .
 //= require_self
 
