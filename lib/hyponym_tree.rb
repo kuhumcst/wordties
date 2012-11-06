@@ -3,6 +3,8 @@ class HyponymTree
   attr_reader :syn_sets
   def initialize(syn_sets)
     @syn_sets = syn_sets
+#####Set for custom sub-dir
+#    Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   end
 
   def filtered_by_level(radius_by_level, pixels_per_group)
@@ -61,7 +63,7 @@ class HyponymTree
 	h['name'] = key.pretty_label
 	h['hyponym_count'] = key['hyponym_count']
 	h['parent_id'] = key['parent_id']
-	h['link'] = ord_path(key.word_senses.first, :anchor => "begreber")
+	h['link'] = ord_url(key.word_senses.first, :anchor => "begreber")
       end
       a.push(h)
     end
