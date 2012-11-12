@@ -15,3 +15,7 @@ en:
       sub_concepts: sub-concepts
       alignment: alignment
       features: features
+    alignment_rel:
+	da: danish
+	en: english
+	fi: finnish

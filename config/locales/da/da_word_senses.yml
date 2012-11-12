@@ -15,5 +15,7 @@ da:
       sub_concepts: underbegreber
       alignment: alignering
       features: egenskaber
-  
-  
+    alignment_rel:
+	  da: danske
+	  en: engelske
+	  fi: finske
