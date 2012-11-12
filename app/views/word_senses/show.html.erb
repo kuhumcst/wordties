@@ -50,7 +50,7 @@
 <% unless @alignments_wordnet.empty? %>
     <div class="analysisBox alignment">
         <h3><%= t(:alignment, :scope => 'word_senses.headings').capitalize %></h3>
-        <%=raw t('word_senses.wordnet_alignment', :aligned_wordnets => link_to(t(:en, :scope => 'word_senses.alignment_rel') + " Wordnet", "http://wordnet.princeton.edu/", :target => '_blank'), :current_wordnet => t(:da, :scope =>  'word_senses.alignment_rel')) %>:
+        <%=raw t('word_senses.wordnet_alignment', :aligned_wordnets => link_to(t(:en, :scope => 'word_senses.alignment_rel').capitalize + " Wordnet", "http://wordnet.princeton.edu/", :target => '_blank'), :current_wordnet => t(:da, :scope =>  'word_senses.alignment_rel').capitalize) %>:
         <ul class="list">
            <% for alignment in @alignments_wordnet %>
             <li>
