@@ -16,6 +16,6 @@ en:
       alignment: alignment
       features: features
     alignment_rel:
-	da: danish
-	en: english
-	fi: finnish
+      da: danish
+      en: english
+      fi: finnish

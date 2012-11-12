@@ -16,6 +16,6 @@ da:
       alignment: alignering
       features: egenskaber
     alignment_rel:
-	  da: danske
-	  en: engelske
-	  fi: finske
+      da: danske
+      en: engelske
+      fi: finske
