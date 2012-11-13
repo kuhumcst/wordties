@@ -40,8 +40,8 @@ module Import
         :drop_mapping_table,
         :register_reverse_relation_types,
         :symmetize_reverse_relations,
-        #:generate_word_sense_headings,
-        #:generate_word_parts
+        :generate_word_sense_headings,
+        :generate_word_parts
       ]
       ActiveRecord::Base.transaction do
         steps.each do |step|
@@ -95,7 +95,7 @@ SQL
       #  ontological_type: Ontological type of the synset, e.g. 'Comestible'
       #         or 'Vehicle+Object+Artifact'.
       rows(%w{id label gloss ontological_type}) do |row|
-        next unless local_synset_id?(row['id'])
+        next unless local_synset_id? row['id']
 
         syn_set = DanNet::SynSet.new(:label => row['label'])
         if row['gloss'] =~ /^(.*)(\s*\(Brug:\s"(.*))"\)/
@@ -137,12 +137,12 @@ SQL
       #  form:  The lexical form of the entry
       #  pos:   The part of speech of the entry
       rows(%w{id form pos}) do |row|
-        next unless local_word_id? row['id']
-        word = DanNet::Word.new(
+	next unless local_word_id? row['id']
+	word = DanNet::Word.new(
           :lemma => row['form'],
           :pos_tag => pos_tag_by_name(row['pos']))
-        word.id = convert_hyphened_id(row['id'])
-        word.save!
+        word.id = convert_hyphened_id(row['id']) 
+	word.save!
       end
     end
 
@@ -160,7 +160,7 @@ SQL
         # specified by the row already exists. If not, false word senses
         # will be created. This is caused by the column ddo_id which we will
         # need to handle seperately
-        next unless local_synset_id?(row['synset_id'])
+        next unless local_synset_id? row['synset_id']
         next unless local_word_id? row['word_id']
         key_columns = {
           :word_id     => convert_hyphened_id(row['word_id']),
@@ -370,18 +370,18 @@ SQL
     end
 
     def local_synset_id?(id)
-       id =~ /^[0-9]+$/
+       id =~ /^[0-9]+[-]?[0-9]+/
     end
 
     def local_word_id?(id)
-      id =~ /^[0-9]+$/
+      id =~ /^[0-9]+[-]?[0-9]+/
     end
 
     def self.import
       DanNetImporter.new.run
     end
     
-    def self.import_last
+    def self.import_word_steps
       DanNetImporter.new.generate_word_steps
     end
     

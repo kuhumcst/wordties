@@ -126,7 +126,7 @@ WITH RECURSIVE t(level,id,parent_id) as (
     def cleaned_label
       case label
       when /:\s*([^;}]+)/ then $1
-      when /\{([^_,]+)/ then $1
+      when /(\{)?([^_,]+)/ then $2
       end
     end
 

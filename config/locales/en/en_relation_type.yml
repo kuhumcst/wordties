@@ -30,6 +30,7 @@ en:
       en: english
       da: danish
       fi: finnish
+      et: estonian
     relation_type_symbols:
       eq_synonym: →
       eq_near_synonym: →
