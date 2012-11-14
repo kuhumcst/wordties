@@ -79,7 +79,7 @@ alignments = Table('alignments', metadata,
                    Column('syn_set_id', BigInteger, ForeignKey('syn_sets.id'), nullable=False),
 		   Column('through_source_id', Text, ForeignKey('sources.id')),
 		   Column('ext_syn_set_id', Integer),
-		   UniqueConstraint('source_id', 'key', 'syn_set_id', 'relation_type_name', name='alignments_source_and_key_and_syn_set_id_uniq')
+		   UniqueConstraint('source_id', 'key', 'syn_set_id', 'ext_syn_set_id', 'relation_type_name', name='alignments_uniq')
 )
 
 metadata.create_all(engine) # Create Alignments, Instances, Sources tables if doesn't exist
