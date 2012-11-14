@@ -91,7 +91,7 @@ if options.source == PWN_id:
 	engine.execute(instances.insert().values(id=nextId))
 	engine.execute(sources.insert().values(id=options.source, instance_id=nextId, lang=options.lang))
 else:
-	engine.execute(instances.insert().values(id=nextId, uri=options.uri))
+	engine.execute(instances.insert().values(id=nextId, uri=options.uri, last_uptime=datetime.datetime.now()))
 	engine.execute(sources.insert().values(id=options.source, instance_id=nextId, lang=options.lang))
 
 # Open file
