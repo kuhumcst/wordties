@@ -5,9 +5,13 @@ require 'call-me/memoize'
 module Import
   class DanNetImporter
     #include Hirb::Console
-    DATA_DIR = "/home/seaton/git/andreord-public/lib/import/dan_net_data"
-    DATA_FILE = "#{DATA_DIR}/dannet.zip"
-    DATA_URL = "http://wordnet.dk/dannet/dannet/DanNet-2.1_csv.zip"
+
+    #DATA_DIR = "/home/seaton/git/andreord-public/lib/import/dan_net_data"
+    #DATA_FILE = "#{DATA_DIR}/dannet.zip"
+
+    DATA_DIR = "/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd"
+    DATA_FILE = "#{DATA_DIR}/estwn-andreord_import.zip"
+    DATA_URL = "http://devtools1.clarin.dk/andreord-files/estwn-andreord_import.zip"
     UNITS = %w{synsets dummies synset_attributes words wordsenses relations}
 
     REVERSE_RELATIONS = { 'holo' => 'mero', 'hypero' => 'hypo',
@@ -106,7 +110,8 @@ SQL
         end
         syn_set.id = convert_hyphened_id(row['id'])
         syn_set.save!
-
+	
+	next unless row['ontological_type'] != nil
         type_names = row['ontological_type'].gsub(/[\(\)]/, '').split("+")
         type_names.each do |type_name|
           syn_set.features.create!(:feature_type => feature_type_by_name(type_name))
@@ -370,18 +375,18 @@ SQL
     end
 
     def local_synset_id?(id)
-       id =~ /^[0-9]+[-]?[0-9]+/
+       id =~ /^([0-9]+[-]?[0-9]+|[0-9]+)/
     end
 
     def local_word_id?(id)
-      id =~ /^[0-9]+[-]?[0-9]+/
+      id =~ /^([0-9]+[-]?[0-9]+|[0-9]+)/
     end
 
     def self.import
       DanNetImporter.new.run
     end
     
-    def self.import_word_steps
+    def self.import_last
       DanNetImporter.new.generate_word_steps
     end
     
