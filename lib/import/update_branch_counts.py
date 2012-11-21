@@ -55,7 +55,7 @@ def traverse(top_node):
 		    G.node[node]['branch_count'] = sum(counts) + 1
 	except:
 		print "Error occurred:", sys.exc_info()[0]
-		# raise
+		raise
 
 def update():
 	cur = conn.cursor()
