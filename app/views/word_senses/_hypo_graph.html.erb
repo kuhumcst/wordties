@@ -68,10 +68,9 @@ partition.node.add(pv.Wedge)
       return (ofTotal*100).toFixed(1) + " % (" + n.nodeValue['hyponym_count'] + " / " + hyponymCount + " )"
     })
 
-
 partition.label.add(pv.Label)
     .font(function (d) d.parentNode ? "13px 'Arvo'" : "bold 16px 'Arvo'")
-    .visible(function(d) (d.angle * d.outerRadius >= 6) && d.nodeName != 'rest')
+    .visible(function(d) (d.y * d.dx >= 6) && d.nodeName != 'rest')
 
 vis.render()
 
