@@ -7,17 +7,18 @@ Andreord::Application.routes.draw do
   end
 
   resources :word_suggestions
+  match '/word_suggestions/:filter/:query' => 'word_suggestions#filter', :as => :word_suggestions_query
   resources :ord,
     :controller => 'word_senses'
   resources :den_danske_ordbog, 
     :controller => 'ddo_mappings'
-  match '/find/:query' => 'word_senses#search', :as => :find_heading
+  match '/find/:filter/:query' => 'word_senses#search', :as => :find_heading
   match '/synset/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
-  match '/begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
-  match '/disambiguation/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
-  match '/flertydighed/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
+  match '/begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set_da
+  match '/disambiguation/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
+  match '/flertydighed/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense_da
   match '/spelling/:query' => 'wrong_spellings#show', :as => :correct_spelling
-  match '/stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling
+  match '/stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling_da
   resources :sitemaps
   resources :synonyms
   match 'sitemap_index.xml' => 'sitemap_index#show', :as => :sitemap_index

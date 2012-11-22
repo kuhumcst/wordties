@@ -56,6 +56,9 @@ h2,h3 {
 	-moz-box-shadow: 10px 0px 7px -5px #666;
 }
 
+#header #query.with_filters {
+	height: 65px;
+}
 
 #logo {
 	float: right;
@@ -121,6 +124,16 @@ h2,h3 {
     width:20em
 }
 
+#queryFilter {
+	display: inline;
+	float: left;
+	width: 100%;
+	padding: 5px 20px;
+}
+
+#queryButton { 
+	float: right
+}
 
 p.highlight {
 	padding: 1em;

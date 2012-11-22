@@ -4,6 +4,7 @@ development:
   adapter: postgresql
 #  adapter: jdbcpostgresql
 #  url: jdbc:postgresql://localhost:5432/andreord_development
+#  database: andreord_dannet
   database: andreord
   username: andreord
   encoding: utf8

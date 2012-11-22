@@ -1,6 +1,7 @@
 #coding: utf-8
 class WordSensesController < ApplicationController
   before_filter :bind_query, :only => :search
+  before_filter :find_sense, :only => :search
 
   def show
     @sense  = DanNet::WordSense.find(params[:id])
@@ -19,14 +20,23 @@ class WordSensesController < ApplicationController
   end
 
   def search
-    sense = DanNet::WordSense.find_by_heading(@query)
-    if sense
-      redirect_to ord_path(sense), :status => :moved_permanently
-    elsif DanNet::Word.find_by_lemma(@query)
-      redirect_to disambiguage_word_sense_path(@query)
+    if DanNet::Word.find_by_lemma(@query)
+      redirect_to disambiguage_word_sense_path(@filter, @query)
     else
       redirect_to correct_spelling_path(@query)
     end
+  end
+
+  def find_sense
+    @sense = DanNet::WordSense.find_by_heading(@query)
+    @filter = params[:filter]
+    if @sense
+	if @sense.syn_set.alignments.nil? && @filter == 'aligned'
+	  redirect_to ord_path(@sense), :status => :moved_permanently
+	elsif @filter != 'aligned'  
+      	  redirect_to ord_path(@sense), :status => :moved_permanently
+	end  
+    end  
   end
 
   def best_for_syn_set

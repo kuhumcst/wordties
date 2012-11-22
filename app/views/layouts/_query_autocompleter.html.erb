@@ -1,7 +1,6 @@
-<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
 <script type="text/javascript">
  // Create a new YUI instance and populate it with the required modules.
- YUI().use('event', 'datasource', 'autocomplete', 'autocomplete-highlighters', function (Y) {
+ YUI().use('event', 'cookie', 'datasource', 'autocomplete', 'autocomplete-highlighters', function (Y) {
      var searchItemTemplate = 
  	"<div>" +
  	  "<span>{before}</span>" +
@@ -12,7 +11,7 @@
     function selectSearchTerm(e) {
     	e.preventDefault();
     	Y.one('#queryInput').set('value', e.result.raw.term);
-    	gotoWord(e.result.raw.term);
+    	gotoWord(e.result.raw.term, Y.one('#queryFilter input[name=filter_option]:checked').get("value"));
     	
     	return false;
     }
@@ -32,12 +31,22 @@
 	    });
 	  });
 	 }
+	 
+	 function doChangeEvent(val) {
+	 	oDS.set("source", "<%= word_suggestions_path %>/"+val);
+        oDS.cache.flush();
+        var exdate = new Date();
+		exdate.setHours(exdate.getHours()+4);
+    	// reset cookie
+        Y.Cookie.set("_yui_form_option_filter", val, { expires: exdate });
+	 }
+	 
     // Add the yui3-skin-sam class to the body so the default
     // AutoComplete widget skin will be applied.
     Y.one('body').addClass('yui3-skin-sam');
     
     // Use an DataSource
-    var oDS = new Y.DataSource.IO({source: "<%= word_suggestions_path %>"});
+    var oDS = new Y.DataSource.IO({source: "<%= word_suggestions_path %>/" + Y.one('#queryFilter input[name=filter_option]:checked').get("value")});
 	oDS.plug({fn:Y.Plugin.DataSourceCache, cfg:{max:5}});
     oDS.plug(Y.Plugin.DataSourceTextSchema, {
    	 schema: {
@@ -51,10 +60,22 @@
    Y.one('#queryInput').plug(Y.Plugin.AutoComplete, {
     resultHighlighter: 'wordMatch',
     resultFormatter: searchFormatter,
-    requestTemplate: '?query={query}',
+    requestTemplate: '/{query}',
     source: oDS
-   })
+   });
    
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
+   
+   Y.all('#queryFilter input[type=radio]').each(function (node) {
+    var saved_val = Y.Cookie.get("_yui_form_option_filter", String);
+    node.on('change', function () {
+        var val = this.get('value');
+        doChangeEvent(val);
+    })
+	if(saved_val == node.get("value")) { 
+	  node.set("checked", true);
+	  doChangeEvent(saved_val);
+    }
+   });
  });
 </script>

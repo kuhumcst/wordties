@@ -3,3 +3,5 @@ en:
       choose_one: Choose one
       select_sense: Select sense
       more_senses: "Word <em>%{query}</em> has several senses."
+      filter_none: "Showing all senses for Word <em>%{query}</em>:"
+      filter_used: "Showing only senses with Multi-lingual Alignments for Word <em>%{query}</em>."

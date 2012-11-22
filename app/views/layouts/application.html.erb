@@ -12,13 +12,17 @@
   <body>
     <div id="scene">
       <div id="header">
-          <div id="query">
+          <div id="query" class="with_filters">
                 <%= form_tag '', :method => :get, :id => :search_form do -%>
                   <div id="querySuggestions">
                       <input id="queryInput" type="text"/>
                       <div id="querySuggestionsContainer"></div>
+                      <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
+                      <div id="queryFilter">
+                  		<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application) %>
+                  		<%= radio_button_tag 'filter_option', 'aligned', params[:filter_option] == 'aligned' %><%= label_tag "label_aligned", t(:search_filter, :scope => :application) %>
+                 	  </div>
                   </div>
-                  <%= submit_tag t(:search_btn, :scope => :application) %>
                 <% end -%> 
             </div>
             <div id="logo">
@@ -28,8 +32,9 @@
           </div>
           <script>
               $('search_form').observe('submit', function(e) {
-                  e.stop()
-                  gotoWord($F('queryInput'))
+                  e.stop();
+                  console.log($$('#queryFilter input[name=filter_option]:checked').first().value);
+                  gotoWord($F('queryInput'), $$('#queryFilter input[name=filter_option]:checked').first().value);
               })
           </script>
           <div id="main">

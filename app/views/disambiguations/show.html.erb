@@ -1,7 +1,13 @@
 <h2><%= @query %></h2>
 
 <h3><%=t :select_sense, :scope => :disambiguations %></h3>
-<p><%= raw(t(:more_senses, :scope => :disambiguations, :query => @query))%>. <%=t :choose_one, :scope => :disambiguations %></p>
+<p>
+<% if @filter != 'aligned' %> 
+	<%= raw(t(:filter_none, :scope => :disambiguations, :query => @query))%>	
+<% else %>
+	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query))%>	
+<% end %>
+<%=t :choose_one, :scope => :disambiguations %></p>
 <ol>
     <%= render :partial => 'sense', :collection => @senses  %>
 </ol>

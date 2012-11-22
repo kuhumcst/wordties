@@ -44,8 +44,8 @@ module Import
         :drop_mapping_table,
         :register_reverse_relation_types,
         :symmetize_reverse_relations,
-        :generate_word_sense_headings,
-        :generate_word_parts
+       # :generate_word_sense_headings,
+       # :generate_word_parts
       ]
       ActiveRecord::Base.transaction do
         steps.each do |step|

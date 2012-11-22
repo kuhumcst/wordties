@@ -14,7 +14,8 @@ cur = conn.cursor()
 #
 
 # Set imported relations file (csv)
-f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')
+#f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')
+f=open('/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd/relations.csv')
 
 G=nx.DiGraph()
 

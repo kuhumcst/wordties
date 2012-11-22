@@ -3,3 +3,5 @@ da:
       choose_one: Vælg en 
       select_sense: Vælg betydning
       more_senses: "Der er registreret flere betydninger for <em>%{query}</em>."
+      filter_none: "Showing all senses for Word <em>%{query}</em>:"
+      filter_used: "Showing only senses with Multi-lingual Alignments for Word <em>%{query}</em>."

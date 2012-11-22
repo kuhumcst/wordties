@@ -34,7 +34,7 @@ module Andreord
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'en', '*.{rb,yml}').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'da', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = :da
+    config.i18n.default_locale = :en
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
@@ -52,5 +52,6 @@ module Andreord
     config.assets.version = '1.0'
     
     config.assets.initialize_on_precompile = false
+
   end
 end
