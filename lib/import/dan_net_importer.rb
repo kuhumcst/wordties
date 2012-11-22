@@ -6,16 +6,18 @@ module Import
   class DanNetImporter
     #include Hirb::Console
 
-    #DATA_DIR = "/home/seaton/git/andreord-public/lib/import/dan_net_data"
-    #DATA_FILE = "#{DATA_DIR}/dannet.zip"
+    DATA_DIR = "/home/seaton/WordTies/git/andreord-public/lib/import/dan_net_data/DanNet-2.2/DanNet-2.2_csv"
+    DATA_FILE = "#{DATA_DIR}/DanNet-2.2_csv.zip"
 
-    DATA_DIR = "/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd"
-    DATA_FILE = "#{DATA_DIR}/estwn-andreord_import.zip"
-    DATA_URL = "http://devtools1.clarin.dk/andreord-files/estwn-andreord_import.zip"
+    #DATA_DIR = "/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd/kb65"
+    #DATA_FILE = "#{DATA_DIR}/estwn_kb65.zip"
+    DATA_URL = "http://wordnet.dk/dannet/dannet/DanNet-2.2_csv.zip"
     UNITS = %w{synsets dummies synset_attributes words wordsenses relations}
-
+    DELIMITER = "@"
+    FILE_EXT = ".csv"
     REVERSE_RELATIONS = { 'holo' => 'mero', 'hypero' => 'hypo',
       'mero' => 'holo', 'hypo'   => 'hypero'}
+    REVERSE_RELATIONS_BLACKLIST = %w{has_mero_location has_holo_location}
 
     def initialize
       change_log(File.new('importer.out', 'w'))
@@ -44,8 +46,8 @@ module Import
         :drop_mapping_table,
         :register_reverse_relation_types,
         :symmetize_reverse_relations,
-       # :generate_word_sense_headings,
-       # :generate_word_parts
+       #:generate_word_sense_headings,
+       #:generate_word_parts
       ]
       ActiveRecord::Base.transaction do
         steps.each do |step|
@@ -218,6 +220,7 @@ SQL
       rel_type_map = DanNet::RelationType.all.index_by(&:name)
       rel_type_map.values.each do |rel_type|
         REVERSE_RELATIONS.find do |from,to|
+	  next if REVERSE_RELATIONS_BLACKLIST.include? rel_type.name
           next unless rel_type.name.include? from
           rel_type.reverse = rel_type_map[rel_type.name.gsub(from,to)]
         end
@@ -316,7 +319,7 @@ SQL
 
     def file_content
       begin
-        file = File.open("#{DATA_DIR}/#{@unit}.csv", "r:UTF-8") # read with UTF-8 encoding
+        file = File.open("#{DATA_DIR}/#{@unit}#{FILE_EXT}", "r:UTF-8") # read with UTF-8 encoding
         file.read
         #Iconv.conv("UTF-8", "ISO-8859-1", file.read)
       ensure
@@ -327,7 +330,7 @@ SQL
     def rows(header)
       file_content.each_line do |line|
         h={}
-        header.zip(line.split("@")).each {|k,v|
+        header.zip(line.split(DELIMITER)).each {|k,v|
           h[k] = v
         }
         begin
@@ -389,6 +392,10 @@ SQL
     def self.import_last
       DanNetImporter.new.generate_word_steps
     end
+
+    def self.reimport_relations
+      DanNetImporter.new.reimport_relations
+    end
     
     def generate_word_steps
       steps = [
@@ -396,6 +403,24 @@ SQL
               :generate_word_parts
             ]
        ActiveRecord::Base.transaction do
+          steps.each do |step|
+            puts "running '#{step}' ... "
+            send(step)
+          end
+        end
+    end
+
+    def reimport_relations
+	@unit = "relations"
+	run_sql "TRUNCATE relations CASCADE"
+	run_sql "TRUNCATE relation_types CASCADE"
+	steps = [
+		:download_file,
+		:import_relations,
+		:register_reverse_relation_types,
+        	:symmetize_reverse_relations,
+		]
+	ActiveRecord::Base.transaction do
           steps.each do |step|
             puts "running '#{step}' ... "
             send(step)
