@@ -1,4 +1,5 @@
 en:
-    choose_one: Choose one
-    select_sense: Select sense
-    more_senses: "Word <em>%{query}</em> has several senses."
+    disambiguations:
+      choose_one: Choose one
+      select_sense: Select sense
+      more_senses: "Word <em>%{query}</em> has several senses."
