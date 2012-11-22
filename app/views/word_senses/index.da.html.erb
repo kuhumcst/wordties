@@ -4,10 +4,10 @@
   <span class="siteName">Andre ord</span> viser hvordan begreberne hænger sammen.
 </p>
 <p>
-  Her kan man se at en <%= link_to 'dværgpil', find_heading_path("dværgpil") %>
-  <span class="relationType">er en slags</span> <%= link_to 'busk', find_heading_path('busk') %>,
-  at et <%= link_to 'lysthus', find_heading_path('lysthus (bygning)') %> <span class="relationType">findes i</span> en <%= link_to 'have', find_heading_path('have (område)') %>,
-  og at <%= link_to 'fiberdrys', find_heading_path('fiberdrys') %> <span class="relationType">bruges til</span> at <%= link_to 'spise', find_heading_path('spise (indtage)') %>.
+  Her kan man se at en <%= link_to 'dværgpil', find_heading_path("fullsearch", "dværgpil") %>
+  <span class="relationType">er en slags</span> <%= link_to 'busk', find_heading_path("fullsearch", 'busk') %>,
+  at et <%= link_to 'lysthus', find_heading_path("fullsearch", 'lysthus (bygning)') %> <span class="relationType">findes i</span> en <%= link_to 'have', find_heading_path("fullsearch", 'have (område)') %>,
+  og at <%= link_to 'fiberdrys', find_heading_path("fullsearch", 'fiberdrys') %> <span class="relationType">bruges til</span> at <%= link_to 'spise', find_heading_path("fullsearch", 'spise (indtage)') %>.
 </p>
 <p>
   Til forskel fra en almindelig ordbog er det ikke definitionen af ordet der står i centrum.
