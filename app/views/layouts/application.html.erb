@@ -33,7 +33,6 @@
           <script>
               $('search_form').observe('submit', function(e) {
                   e.stop();
-                  console.log($$('#queryFilter input[name=filter_option]:checked').first().value);
                   gotoWord($F('queryInput'), $$('#queryFilter input[name=filter_option]:checked').first().value);
               })
           </script>
