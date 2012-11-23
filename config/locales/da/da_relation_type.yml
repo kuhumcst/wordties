@@ -30,10 +30,10 @@ da:
     has_holo_madeof: indgår i
     has_mero_location: indeholder
     has_subevent: has sub-event
-    has_derived: has deriveddomain: fag
+    has_derived: has derived
     causes: causes
     antonym: antonym 
-    domain: domain
+    domain: fag
     derivation: derivation
     state_of: state of
     role: udfører
