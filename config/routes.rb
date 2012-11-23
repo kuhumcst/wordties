@@ -6,7 +6,7 @@ Andreord::Application.routes.draw do
     end
   end
 
-  resources :word_suggestions
+  match '/word_suggestions/:query' => 'word_suggestions#filter', :default => {:filter => :fullsearch}, :as => :word_suggestions_query
   match '/word_suggestions/:filter/:query' => 'word_suggestions#filter', :as => :word_suggestions_query
   resources :ord,
     :controller => 'word_senses'
