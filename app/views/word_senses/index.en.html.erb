@@ -1,10 +1,22 @@
 <div style="margin-top: 1em; clear: both"></div>
-<%= image_tag 'tree_bw.gif', :class => 'treeImage' %>
-<p class="highlight">
-  <span class="siteName">Word Ties</span> is a browser that shows how concepts are connected.
-</p>
-<p>Content to be added for instance/wordnet index page.</p>
-<p>
-  This work has been performed within the META-NORD project which has received funding from the European Commission through the ICT PSP Programme, grant agreement no 270899.
-</p>
-
+<div id="metanord-logo"><%= link_to(t(:title, :scope => :application), 'http://www.meta-net.eu/projects/meta-nord/', :target => '_blank') %></div>
+<div id="metanet-logo"><%= link_to(t(:title, :scope => :application), 'http://www.meta-net.eu/projects/meta-nord/', :target => '_blank') %></div>
+<div class="about">
+	<h3>About WordNet</h3>
+	<p>
+	  Conceptual network is displayed on this page are based on data from <%= link_to 'DanNet',  'http://www.wordnet.dk' %> version 2.1.
+	  The project is a collaboration between <%= link_to 'Center for Sprogteknologi', 'http://cst.ku.dk' %> at University of Copenhagen
+	  and <%= link_to 'Det Danske Sprog- og Litteraturselskab', 'http://dsl.dk/' %>.
+	</p>
+	<p>In total there are registered <%= number_with_delimiter(DanNet::SynSet.count) %> concepts
+which is held in place by <%= number_with_delimiter(DanNet::Relation.count) %> relations.</p>
+	</p>
+	<p>
+	  DanNets influential example is the English language <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
+	  since the mid-1980s has been developed at Princeton University.
+	</p>
+	<p>
+	This application is most useful as a utility software for trying to get clarify what a text means.
+	Nevertheless, ambition with <span class="siteName">WordTies</span> is to invite people to look more closely at how the entire Wordnet is conceptually linked.
+	</p>
+</div>
