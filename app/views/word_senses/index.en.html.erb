@@ -4,7 +4,7 @@
 <div class="about">
 	<h3>About WordNet</h3>
 	<p>
-	  Conceptual network is displayed on this page are based on data from <%= link_to 'DanNet',  'http://www.wordnet.dk' %> version 2.1.
+	  The conceptual network displayed in this website is based on data from <%= link_to 'DanNet',  'http://www.wordnet.dk' %> version 2.1.
 	  The project is a collaboration between <%= link_to 'Center for Sprogteknologi', 'http://cst.ku.dk' %> at University of Copenhagen
 	  and <%= link_to 'Det Danske Sprog- og Litteraturselskab', 'http://dsl.dk/' %>.
 	</p>
@@ -12,11 +12,12 @@
 which is held in place by <%= number_with_delimiter(DanNet::Relation.count) %> relations.</p>
 	</p>
 	<p>
-	  DanNets influential example is the English language <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
+	  DanNet's is influenced by the English language <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
 	  since the mid-1980s has been developed at Princeton University.
 	</p>
+	<h3>About WordTies</h3>
 	<p>
-	This application is most useful as a utility software for trying to get clarify what a text means.
-	Nevertheless, ambition with <span class="siteName">WordTies</span> is to invite people to look more closely at how the entire Wordnet is conceptually linked.
+	The <%=t :title, :scope => :application %> application is most useful as a utility software for trying to get clarify what a text means.
+	Nevertheless, ambition with <span class="siteName"><%=t :title, :scope => :application %></span> is to invite people to look more closely at how the entire Wordnet is conceptually linked.
 	</p>
 </div>

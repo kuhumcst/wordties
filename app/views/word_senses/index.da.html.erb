@@ -12,13 +12,14 @@
 som holdes på plads af <%= number_with_delimiter(DanNet::Relation.count) %> indbyrdes forbindelser.</p>
 	</p>
 	<p>
-	  DanNets indflydelsesrige forbillede er det engelsksprogede <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
+	  DanNet's indflydelsesrige forbillede er det engelsksprogede <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
 	  der siden midten af 1980'erne er blevet udviklet ved Princeton University.
 	</p>
+	<h3>Om WordTies</h3>
 	<p>
 	  Ordnetværk gør mest nytte som hjælpeværktøj for software 
 	  der forsøger at komme på det rene med hvad tekster betyder. 
-	  Alligevel er ambitionen med <span class="siteName">WordTies</span>
+	  Alligevel er ambitionen med <span class="siteName"><%=t :title, :scope => :application %></span>
 	  at invitere mennesker til at se lidt nærmere på
 	  hvordan verden begrebsligt hænger sammen.
 	</p>
