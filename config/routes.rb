@@ -12,10 +12,13 @@ Andreord::Application.routes.draw do
     :controller => 'word_senses'
   resources :den_danske_ordbog, 
     :controller => 'ddo_mappings'
+  match '/find/:query' => 'word_senses#search', :default => {:filter => :fullsearch}, :as => :find_heading
   match '/find/:filter/:query' => 'word_senses#search', :as => :find_heading
   match '/synset/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
   match '/begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set_da
+  match '/disambiguation/:query' => 'disambiguations#show', :default => {:filter => :fullsearch}, :as => :disambiguage_word_sense
   match '/disambiguation/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
+  match '/flertydighed/:query' => 'disambiguations#show', :default => {:filter => :fullsearch}, :as => :disambiguage_word_sense_da
   match '/flertydighed/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense_da
   match '/spelling/:query' => 'wrong_spellings#show', :as => :correct_spelling
   match '/stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling_da

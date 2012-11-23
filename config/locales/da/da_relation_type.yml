@@ -1,23 +1,27 @@
 da:
     eq_synonym: eq_synonym
+    eq_near_synonym: eq_near_synonym
+    eq_has_hyperonym: eq_has_hyperonym
+    eq_has_hyponym: eq_has_hyponym
     xpos_near_synonym: nærsynonymt (ordklasse)
-    role_patient: udfører (patiens)
+    xpos_fuzzynym: xpos fuzzynym
     concerns: vedrører
+    fuzzynym: fuzzynym
     used_for: bruges til
-    involved_agent: inddrager (agens)
-    made_by: fremstilles ved
     used_for_object: bruges til (objekt)
+    made_by: fremstilles ved
+    involved: inddrager
+    involved_agent: inddrager (agens)
     involved_patient: inddrager (patiens)
-    near_synonym: næsten synonymt
-    role_agent: udfører (agens)
-    near_antonym: nærantonym
     involved_instrument: anvendt redskab
+    involved_target_direction: inddrager (target direction)
+    involved_direction: inddrager (direction)
+    near_synonym: næsten synonymt
+    near_antonym: nærantonym
     has_holonym: del af
     has_hyperonym: har overbegreb
-    eq_has_hyponym: eq_has_hyponym
     has_mero_part: har del
     has_holo_part: del af
-    eq_has_hyperonym: eq_has_hyperonym
     has_holo_location: placeret i
     has_mero_madeof: lavet af
     has_holo_member: indgår i
@@ -25,7 +29,21 @@ da:
     has_mero_member: sammensat af
     has_holo_madeof: indgår i
     has_mero_location: indeholder
+    has_subevent: has sub-event
+    has_derived: has derived
+    causes: causes
+    antonym: antonym 
     domain: fag
+    derivation: derivation
+    state_of: state of
+    role: udfører
+    role_agent: udfører (agens)
+    role_location: udfører (location)
+    role_patient: udfører (patiens)
+    role_target_direction: udfører (target direction)
+    role_instrument: udfører (redskab)
+    is_subevent_of: is subevent of
+    be_in_state: be in state
     relation_type_lang:
       en: engelsk
       da: dansk
