@@ -5,18 +5,21 @@ import sys
 conn = psycopg2.connect("dbname=andreord user=andreord")
 cur = conn.cursor()
 
+G=nx.DiGraph()
+
 # Uncomment if want to use db relations table in replacement of file input
 #cur.execute("SELECT syn_set_id, target_syn_set_id " +
 #             "FROM relations r " +
 #             "JOIN relation_types rt ON r.relation_type_id = rt.id "
 #             "WHERE rt.name = %s ", ('has_hyperonym',))
-#resultList = cur.fetchall()
 #
+#for record in cur:
+#    src, target = record[0], record[1]
+#    if target != src:
+#	G.add_edge(target, src)
 
 # Set imported relations file (csv)
-f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')
-
-G=nx.DiGraph()
+#f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')	
 
 for line in f.readlines():
     record = line.split("@")
@@ -46,7 +49,7 @@ for line in f.readlines():
 # Note: Update reference to top-most node before using ie {DN:TOP}
 #top_node = "20633" # set if top node exists
 synset_factor = 1000 # db factoring
-top_node = None #str(20633)
+top_node = 20633 # syn_set_id or None
 
 def traverse(top_node):
 	try:
