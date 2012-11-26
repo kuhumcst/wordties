@@ -19,7 +19,7 @@ G=nx.DiGraph()
 #	G.add_edge(target, src)
 
 # Set imported relations file (csv)
-#f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')	
+f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')	
 
 for line in f.readlines():
     record = line.split("@")
