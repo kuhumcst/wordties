@@ -1,5 +1,5 @@
 en:
   wrong_spellings:
-    not_found_notice: "Word not found in %{wordnet}"
+    not_found_notice: "Word not found."
     check_spelling: Check the spelling
     searched_for: "You searched for <em>%{query}</em>"
