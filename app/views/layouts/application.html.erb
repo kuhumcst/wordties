@@ -20,7 +20,7 @@
                       <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
                       <div id="queryFilter">
                   		<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application) %>
-                  		<%= radio_button_tag 'filter_option', 'aligned', params[:filter_option] == 'aligned' %><%= label_tag "label_aligned", t(:search_filter, :scope => :application) %>
+                  		<%= radio_button_tag 'filter_option', 'aligned', params[:filter_option] == 'aligned' %><%= label_tag "label_aligned", t(:search_filter, :scope => :application, :wordnet => t('application.wordnet')) %>
                  	  </div>
                   </div>
                 <% end -%> 

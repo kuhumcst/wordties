@@ -5,5 +5,5 @@ en:
     made_by: is developed by
     data_from: This site presents data from
     search_btn: Look up
-    search_nofilter: Search in full Wordnet 
-    search_filter: Multilingual Alignments
+    search_nofilter: Search in full %{wordnet} 
+    search_filter: Multilingual alignments
