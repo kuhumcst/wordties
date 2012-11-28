@@ -5,8 +5,10 @@ from sqlalchemy import create_engine, Table, Column, BigInteger, Integer, String
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.schema import UniqueConstraint
 from sqlalchemy.schema import Sequence
+from sqlalchemy.exc import IntegrityError
 from optparse import OptionParser
 import datetime
+import uuid
 
 # Options Parser (note: deprecated since 2.7)
 parser = OptionParser()
@@ -141,6 +143,8 @@ for line in f.readlines():
 					   ext_syn_set_id=ext_syn_set_id
 					   )
                 engine.execute(ins)
+	    except IntegrityError as ie:
+		print ie
             except WordNetError as e:
                 print e
 

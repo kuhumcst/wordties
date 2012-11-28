@@ -49,6 +49,7 @@ en:
       da: danish
       fi: finnish
       et: estonian
+      se: swedish
     relation_type_symbols:
       eq_synonym: →
       eq_near_synonym: →
