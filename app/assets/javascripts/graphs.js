@@ -97,7 +97,7 @@ function rel_graph(data, labels) {
 		var color_cat_override = json.d3CategoryOverride;
 
 		// Ordinal scale Cat20c
-		var colors = (color_cat_override) ? d3.scale[color_cat_override]() : d3.scale.ordinal().domain(rels).range(color_range);
+		var colors = (color_cat_override) ? d3.scale[color_cat_override]().domain(rels) : d3.scale.ordinal().domain(rels).range(color_range);
 		
 		// Create graph
 		create(colors);
