@@ -1,49 +1,59 @@
 en:
-    eq_has_synonym: eq_has_synonym
-    eq_near_synonym: eq_near_synonym
-    eq_has_hyperonym: eq_has_hyperonym
-    eq_has_hyponym: eq_has_hyponym
-    xpos_near_synonym: near synonym (part of speech)
-    xpos_fuzzynym: xpos fuzzynym
+    antonym: antonym
+    be_in_state: be in state
+    causes: causes
     concerns: concerns
+    derivation: derivation
+    domain: domain
+    eq_has_synonym: eq has synonym
+    eq_near_synonym: eq near synonym
+    eq_has_hyperonym: eq has hyperonym
+    eq_has_hyponym: eq has hyponym
     fuzzynym: fuzzynym
-    used_for: used for
-    used_for_object: used for (object)
-    made_by: made by
-    involved: involved
-    involved_agent: involved (agent)
-    involved_patient: involved (patient)
-    involved_instrument: involved (instrument)
-    involved_target_direction: involved (target direction)
-    involved_direction: involved (direction)
-    near_synonym: near synonym
-    near_antonym: near antonym
+    has_derived: has derived
+    has_holo_location: is located in
+    has_holo_madeof: substance holonym
+    has_holo_member: is member of
+    has_holo_part: is part of
     has_holonym: part of
     has_hyperonym: hypernym
-    has_mero_part: has part
-    has_holo_part: is part of
-    has_mero_madeof: is made of
-    has_holo_member: is member of
     has_hyponym: hyponym
+    has_mero_part: has part
+    has_mero_madeof: is made of
     has_mero_member: has member
-    has_holo_madeof: substance holonym
     has_mero_location: contains
-    has_holo_location: is located in
+    has_mero_portion: has portion
+    has_meronym: meronym
     has_subevent: has sub-event
-    has_derived: has derived
-    causes: causes
-    antonym: antonym 
-    domain: domain
-    derivation: derivation
-    state_of: state of
+    has_xpos_hyperonym: has hypernym (part of speech)
+    has_xpos_hyponym: has hyponym (part of speech)
+    involved: involved
+    involved_agent: involved (agent)
+    involved_direction: involved (direction)
+    involved_instrument: involved (instrument)
+    involved_location: involved (location)
+    involved_patient: involved (patient)
+    involved_target_direction: involved (target direction)
+    is_caused_by: is caused by
+    is_derived_from: is derived from
+    is_instance_of: is instance of
+    is_subevent_of: is subevent of
+    made_by: made by
+    near_synonym: near synonym
+    near_antonym: near antonym
     role: role
     role_agent: role (agent)
     role_location: role (location)
     role_patient: role (patient)
     role_target_direction: role (target direction)
     role_instrument: role (instrument)
-    is_subevent_of: is subevent of
-    be_in_state: be in state
+    state_of: state of
+    used_for: used for
+    used_for_object: used for (object)
+    used_for_qualby: used for (qualifying by)
+    xpos_fuzzynym: xpos fuzzynym
+    xpos_near_antonym: near antonym (part of speech)
+    xpos_near_synonym: near synonym (part of speech)
     relation_type_lang:
       en: english
       da: danish
