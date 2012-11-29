@@ -1,94 +1,107 @@
 function rel_graph(data, labels) {
+	var colors;
 	
-	// Ordinal scale
-	var colors = d3.scale.category10();
-	
-	// SVG Panel
-	var h = 600;
-	var w = 750;
-	var r = 170;
-	
-	var svg = d3.select('#relGraph').insert('svg', 'div.graphSelectBox').attr('top', 30).attr('width', w).attr('height', h);
-	var container = svg.append("g").attr("class", "container").attr("transform", "translate(" + (w/2 - 75) + ", " + (h/2 + 30) + ")");
-	
-	// Tree layout
-	var tree = d3.layout.cluster().size([360, r]).separation(function(a, b) { return ((a.parent == b.parent) && (a.rel_type == b.rel_type) ? 1 : 2) / a.depth; }); // leaf nodes at same (one) level
-	var nodes = tree.nodes(data);
-	var links = tree.links(nodes);
-	
-	// 360 rotation
-	var diagonal = d3.svg.diagonal.radial().projection(function(d) { 
-		return [d.y, d.x / 180 * Math.PI];
-	});
-	
-	// Path/Line
-	container.append("g").attr("class", "tree").selectAll(".link").data(links).enter()
-		.append("path")
-		.style("stroke", function(d) { return colors(d.target.rel_type); })
-		.attr("class", "link")
-		.attr("d", diagonal);
+	function create(colors) {
+		// SVG Panel
+		var h = 600;
+		var w = 750;
+		var r = 170;
 		
-	// Nodes
-	var nodeGroup = container.select(".tree").selectAll("g.node")
-	 .data(nodes)
-	 .enter()
-	 .append("g")
-	 .attr("class", "node")
-	 .attr("transform", function(d) {
-	       return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
-	 });
-	 
-	 nodeGroup.append("symbol")
-	 .attr("class", "node")
-	 .size(0);
+		var svg = d3.select('#relGraph').insert('svg', 'div.graphSelectBox').attr('top', 30).attr('width', w).attr('height', h);
+		var container = svg.append("g").attr("class", "container").attr("transform", "translate(" + (w/2 - 75) + ", " + (h/2 + 30) + ")");
+		
+		// Tree layout
+		var tree = d3.layout.cluster().size([360, r]).separation(function(a, b) { return ((a.parent == b.parent) && (a.rel_type == b.rel_type) ? 1 : 2) / a.depth; }); // leaf nodes at same (one) level
+		var nodes = tree.nodes(data);
+		var links = tree.links(nodes);
+		// Legend
+		var myKeys=d3.nest()
+			.key(function(d) {return d.rel_type;})
+			.entries(flare.children);
+		
+		// 360 rotation
+		var diagonal = d3.svg.diagonal.radial().projection(function(d) { 
+			return [d.y, d.x / 180 * Math.PI];
+		});
+		
+		// Path/Line
+		container.append("g").attr("class", "tree").selectAll(".link").data(links).enter()
+			.append("path")
+			.style("stroke", function(d) { return colors(d.target.rel_type); })
+			.attr("class", "link")
+			.attr("d", diagonal);
+			
+		// Nodes
+		var nodeGroup = container.select(".tree").selectAll("g.node")
+		 .data(nodes)
+		 .enter()
+		 .append("g")
+		 .attr("class", "node")
+		 .attr("transform", function(d) {
+		       return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
+		 });
+		 
+		 nodeGroup.append("symbol")
+		 .attr("class", "node")
+		 .size(0);
+		
+		 // Label
+		 var label = nodeGroup.append("text")
+		 .attr("class", "label")
+		 .attr("dy", ".31em")
+		 .text(function(d) { return d.name; })
+		 .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+		 .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+		 .attr("visibility", function(d) { return d.depth > 0  ? "visible" : "hidden" })
+		 .on("mouseover", function() { d3.select(this).attr("class", "label hover")})
+		 .on("mouseout", function() { d3.select(this).attr("class", "label") })
+		 .on("click", function(d) { document.location = d.link; });     
+		 
+		 // Tooltip
+		 label.append("title").text(function(d) { return d.gloss; });
+		 
+		 // Sense lemma  
+		 container.append("text")
+		  .attr("class", "root-node-label")
+		  .attr("dy", ".31em")
+		  .attr("text-anchor", "middle")
+		  .classed("large", function(d) { return nodes[0].name.length <= 10; })
+		  .text(nodes[0].name);
+		  
+		  var legend_container = svg.append("g").attr("class", "legend-container").attr("transform", "translate(600, 125)");
+		  legend_container.append("text").text(labels[0]).attr("text-anchor", "start").attr("transform", "translate(0,0)");
+		  var legend = legend_container.selectAll(".legend")
+		  .data(myKeys)
+		  .enter().append("g")
+		  .attr("class", "legend")
+		  .attr("transform", function(d, i) { return "translate(0," + ((i*20)+20) + ")"; });
+		  
+		  legend.append("rect")
+		      .attr("width", 8)
+		      .attr("height", 8)
+		      .style("fill", function(d) { return colors(d.key); })
+		      .attr("transform", "translate(5, 5)");
+		  
+		  legend.append("text")
+		      .attr("y", 8)
+		      .attr("dy", ".35em")
+		      .style("text-anchor", "start")
+		      .text(function(d) { return d.key; })
+		      .attr("transform", "translate(15, 0)");	 
+	}
 	
-	 // Label
-	 var label = nodeGroup.append("text")
-	 .attr("class", "label")
-	 .attr("dy", ".31em")
-	 .text(function(d) { return d.name; })
-	 .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-	 .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
-	 .attr("visibility", function(d) { return d.depth > 0  ? "visible" : "hidden" })
-	 .on("mouseover", function() { d3.select(this).attr("class", "label hover")})
-	 .on("mouseout", function() { d3.select(this).attr("class", "label") })
-	 .on("click", function(d) { document.location = d.link; });     
-	 
-	 // Tooltip
-	 label.append("title").text(function(d) { return d.gloss; });
-	 
-	 // Sense lemma  
-	 container.append("text")
-	  .attr("class", "root-node-label")
-	  .attr("dy", ".31em")
-	  .attr("text-anchor", "middle")
-	  .classed("large", function(d) { return nodes[0].name.length <= 10; })
-	  .text(nodes[0].name);
-	  
-	  // Legend
-	  var myKeys=d3.nest()
-		.key(function(d) {return d.rel_type;})
-		.entries(flare.children);
-	  var legend_container = svg.append("g").attr("class", "legend-container").attr("transform", "translate(600, 125)");
-	  legend_container.append("text").text(labels[0]).attr("text-anchor", "start").attr("transform", "translate(0,0)");
-	  var legend = legend_container.selectAll(".legend")
-	  .data(myKeys)
-	  .enter().append("g")
-	  .attr("class", "legend")
-	  .attr("transform", function(d, i) { return "translate(0," + ((i*20)+20) + ")"; });
-	  
-	  legend.append("rect")
-	      .attr("width", 8)
-	      .attr("height", 8)
-	      .style("fill", function(d) { return colors(d.key); })
-	      .attr("transform", "translate(5, 5)");
-	  
-	  legend.append("text")
-	      .attr("y", 8)
-	      .attr("dy", ".35em")
-	      .style("text-anchor", "start")
-	      .text(function(d) { return d.key; })
-	      .attr("transform", "translate(15, 0)");	      
+	d3.json('../assets/rel-colors.json', function(json) {
+		// List of Rel Types
+		var rels = json.children.map(function(d) { return d.rel; });
+		var color_range = json.children.map(function(d) { return d.color; });
+		var color_cat_override = json.d3CategoryOverride;
+
+		// Ordinal scale Cat20c
+		var colors = (color_cat_override) ? d3.scale[color_cat_override]() : d3.scale.ordinal().domain(rels).range(color_range);
+		
+		// Create graph
+		create(colors);
+	});
 }
 
 function hypo_graph(data, hyponym_count) {
