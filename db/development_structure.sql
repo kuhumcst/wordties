@@ -26,35 +26,37 @@ SET default_with_oids = false;
 -- Name: alignments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE alignments (
-    id integer NOT NULL,
-    source text NOT NULL,
-    lemma text NOT NULL,
-    definition text NOT NULL,
-    synonyms text NOT NULL,
-    key text NOT NULL,
-    syn_set_id integer NOT NULL,
-    relation_type_name text NOT NULL
-);
-
+-- alignments table defined and created in /lib/import/princeton_import.py
+-- CREATE TABLE alignments (
+--    id integer NOT NULL,
+--    source text NOT NULL,
+--    lemma text NOT NULL,
+--    definition text NOT NULL,
+--    synonyms text NOT NULL,
+--    key text NOT NULL,
+--    syn_set_id integer NOT NULL,
+--    relation_type_name text NOT NULL
+--);
+--
 
 --
 -- Name: alignments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE alignments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
+--
+--CREATE SEQUENCE alignments_id_seq
+--    START WITH 1
+--    INCREMENT BY 1
+--    NO MINVALUE
+--    NO MAXVALUE
+--    CACHE 1;
+--
 
 --
 -- Name: alignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE alignments_id_seq OWNED BY alignments.id;
+-- ALTER SEQUENCE alignments_id_seq OWNED BY alignments.id;
 
 
 --
@@ -582,7 +584,7 @@ CREATE TABLE words (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE alignments ALTER COLUMN id SET DEFAULT nextval('alignments_id_seq'::regclass);
+-- ALTER TABLE alignments ALTER COLUMN id SET DEFAULT nextval('alignments_id_seq'::regclass);
 
 
 --
@@ -687,16 +689,16 @@ ALTER TABLE word_senses ALTER COLUMN id SET DEFAULT nextval('dn_word_senses_id_s
 -- Name: alignments_id; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY alignments
-    ADD CONSTRAINT alignments_id PRIMARY KEY (id);
+-- ALTER TABLE ONLY alignments
+--    ADD CONSTRAINT alignments_id PRIMARY KEY (id);
 
 
 --
 -- Name: alignments_source_and_key_and_syn_set_id_uniq; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY alignments
-    ADD CONSTRAINT alignments_source_and_key_and_syn_set_id_uniq UNIQUE (source, key, syn_set_id);
+-- ALTER TABLE ONLY alignments
+--    ADD CONSTRAINT alignments_source_and_key_and_syn_set_id_uniq UNIQUE (source, key, syn_set_id);
 
 
 --
@@ -1005,8 +1007,8 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- Name: aligments_synset_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY alignments
-    ADD CONSTRAINT aligments_synset_id FOREIGN KEY (syn_set_id) REFERENCES syn_sets(id);
+-- ALTER TABLE ONLY alignments
+--    ADD CONSTRAINT aligments_synset_id FOREIGN KEY (syn_set_id) REFERENCES syn_sets(id);
 
 
 --
