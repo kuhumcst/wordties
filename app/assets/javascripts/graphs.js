@@ -27,7 +27,7 @@ function rel_graph(data, labels) {
 		// Path/Line
 		container.append("g").attr("class", "tree").selectAll(".link").data(links).enter()
 			.append("path")
-			.style("stroke", function(d) { return colors(d.target.rel_type); })
+			.style("stroke", function(d) { return colors(d.target.rel_type_key); })
 			.attr("class", "link")
 			.attr("d", diagonal);
 			
