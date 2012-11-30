@@ -57,6 +57,7 @@ class WordSensesController < ApplicationController
           'link'     => link,
           'synonyms' => syn_set.words.map(&:lemma)*',',
           'gloss'    => syn_set.gloss,
+	  'rel_type_key' => rel_type.name,
 	  'rel_type' => t(rel_type.name)
         })
       end
