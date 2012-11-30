@@ -16,7 +16,7 @@ function rel_graph(data, labels) {
 		var links = tree.links(nodes);
 		// Legend
 		var myKeys=d3.nest()
-			.key(function(d) {return d.rel_type;})
+			.key(function(d) {return d.rel_type_key;})
 			.entries(flare.children);
 		
 		// 360 rotation
@@ -86,22 +86,18 @@ function rel_graph(data, labels) {
 		      .attr("y", 8)
 		      .attr("dy", ".35em")
 		      .style("text-anchor", "start")
-		      .text(function(d) { return d.key; })
+		      .text(function(d) { return d.values[0].rel_type; })
 		      .attr("transform", "translate(15, 0)");	 
 	}
 	
 	d3.json('../assets/rel-colors.json', function(json) {
 		// List of Rel Types
+		var rels = json.children.map(function(d) { return d.rel; });
+		var color_range = json.children.map(function(d) { return d.color; });
 		var color_cat_override = json.d3CategoryOverride;
 
 		// Ordinal scale Cat20c
-		var colors = (color_cat_override) ? d3.scale[color_cat_override]() : null;
-
-		var rels = json.children.map(function(d) { console.log(d.rel); if(colors) colors(d.rel); return d.rel; });
-		var color_range = json.children.map(function(d) { return d.color; });
-
-		// Manual scale
-		if(colors == null) colors = d3.scale.ordinal().domain(rels).range(color_range);
+		var colors = (color_cat_override) ? d3.scale[color_cat_override]().domain(rels) : d3.scale.ordinal().domain(rels).range(color_range);
 		
 		// Create graph
 		create(colors);
