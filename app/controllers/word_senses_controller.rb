@@ -31,9 +31,9 @@ class WordSensesController < ApplicationController
     @sense = DanNet::WordSense.find_by_heading(@query)
     @filter = params[:filter]
     if @sense
-	if @sense.syn_set.alignments.nil? && @filter == 'aligned'
+	if @sense.syn_set.alignments.nil? && @filter.end_with? 'aligned'
 	  redirect_to ord_path(@sense), :status => :moved_permanently
-	elsif @filter != 'aligned'  
+	elsif !@filter.end_width? 'aligned'  
       	  redirect_to ord_path(@sense), :status => :moved_permanently
 	end  
     end  
