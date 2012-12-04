@@ -6,5 +6,6 @@ en:
     data_from: This site presents data from
     search_btn: Look up
     search_nofilter: "Search in full %{wordnet}"
-    search_filter_corepwn: CorePWN alignments
-    search_filter_ml: Multilingual alignments
+    search_filter:
+      ml_aligned: Multilingual alignments
+      corepwn_aligned: CorePWN alignments
