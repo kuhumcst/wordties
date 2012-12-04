@@ -61,11 +61,19 @@ module DanNet
 
     def self.prefix_suggestions(part, filter, limit)
       if filter
+	if filter == 'corepwn_aligned'
+	sql = %{  SELECT DISTINCT(lemma)
+                FROM words
+                WHERE lemma LIKE ? AND wn_corepwn = TRUE
+                ORDER BY lemma
+                LIMIT ?}
+	elsif filter == 'ml_aligned'
 	sql = %{  SELECT DISTINCT(lemma)
                 FROM words
                 WHERE lemma LIKE ? AND wn_aligned = TRUE
                 ORDER BY lemma
                 LIMIT ?}
+	end
       else
 	 sql = %{  SELECT DISTINCT(lemma)
                 FROM words
