@@ -2,7 +2,7 @@
 
 <h3><%=t :select_sense, :scope => :disambiguations %></h3>
 <p>
-<% if @filter != 'aligned' %> 
+<% if !@filter.end_with? 'aligned' %> 
 	<%= raw(t(:filter_none, :scope => :disambiguations, :query => @query))%>	
 <% else %>
 	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query))%>	

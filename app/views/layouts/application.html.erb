@@ -39,7 +39,6 @@
               $('search_form').observe('submit', function(e) {
                   e.stop();
                   var filter = $$('#queryFilter input[name=filter_option]:checked').first().value;
-                  if(filter != 'fullsearch') filter = filter.substring(filter.lastIndexOf('_')+1, filter.length);
                   gotoWord($F('queryInput'), filter);
               })
           </script>
