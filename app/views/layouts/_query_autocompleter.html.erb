@@ -36,15 +36,12 @@
 	 function doChangeEvent(val) {
 	 	oDS.set("source", "<%= word_suggestions_path %>/"+val);
         oDS.cache.flush();
-        
-        var exdate = new Date();
-		exdate.setHours(exdate.getHours()+4);
     	
     	// reset cookie
         var current_val = Y.Cookie.getSub("filter", "current", {domain: "wordties.cst.dk"});
     	
         if(val.lastIndexOf("_aligned") != -1) val = val.substring(0, val.lastIndexOf("_aligned"));
-    	if(current_val != val && current_val != null) Y.Cookie.setSub("filter", current_val, "false", {expires: exdate, domain: "wordties.cst.dk"})
+    	if(current_val != val && current_val != null) Y.Cookie.setSub("filter", current_val, "false", {domain: "wordties.cst.dk"})
     	
     	Y.Cookie.setSub("filter", val, "true", {domain: "wordties.cst.dk"});
     	Y.Cookie.setSub("filter", "current", val, {domain: "wordties.cst.dk"});
@@ -91,8 +88,6 @@
 	  node.set("checked", true);
 	  doChangeEvent(node.get('value'));
     } else {
-    	var exdate = new Date();
-		exdate.setHours(exdate.getHours()+4); 
     	Y.Cookie.setSub("filter", node_val, "false", {domain: "wordties.cst.dk"});
     }
    });
