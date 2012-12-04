@@ -1,5 +1,6 @@
 #coding: utf-8
 class DisambiguationsController < ApplicationController
+  require 'uri'
   before_filter :bind_query
   before_filter :bind_senses, :only => :show
 
@@ -8,7 +9,7 @@ class DisambiguationsController < ApplicationController
 
   def bind_senses
     @senses = DanNet::Word.find_all_by_lemma(@query).map(&:word_senses)
-    @filter = params[:filter]
+    @filter = URI.unescape(params[:filter])
     @senses = @senses.flatten
 
     if @filter.end_with? 'aligned'
@@ -22,7 +23,7 @@ class DisambiguationsController < ApplicationController
     @senses = @senses.sort_by {|ws| ws.heading }
 
     if @senses.length < 1
-	redirect_to correct_spelling_path(@query)
+	redirect_to correct_spelling_path(@query.gsub(/\//, "%2F"))
     elsif @senses.length == 1
 	redirect_to ord_path(@senses.first), :status => :moved_permanently
     end
