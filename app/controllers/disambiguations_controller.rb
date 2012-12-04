@@ -11,8 +11,12 @@ class DisambiguationsController < ApplicationController
     @filter = params[:filter]
     @senses = @senses.flatten
 
-    if @filter == 'aligned'
+    if @filter.end_with? 'aligned'
       @senses.delete_if {|ws| DanNet::Alignment.find_all_by_syn_set_id(ws.syn_set_id).empty? }
+    end
+
+    if @filter == 'ml_aligned'
+      @senses.delete_if {|ws| DanNet::Alignment.find_all_by_syn_set_id_and_through_source_id(ws.syn_set_id, 'wordnet30').empty? }
     end
 
     @senses = @senses.sort_by {|ws| ws.heading }

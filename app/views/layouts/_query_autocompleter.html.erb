@@ -12,7 +12,6 @@
     	e.preventDefault();
     	Y.one('#queryInput').set('value', e.result.raw.term);
     	var filter = Y.one('#queryFilter input[name=filter_option]:checked').get("value")
-    	if(filter != 'fullsearch') filter = filter.substring(filter.lastIndexOf('_')+1, filter.length);
     	gotoWord(e.result.raw.term, filter);
     	
     	return false;
@@ -37,10 +36,18 @@
 	 function doChangeEvent(val) {
 	 	oDS.set("source", "<%= word_suggestions_path %>/"+val);
         oDS.cache.flush();
+        
         var exdate = new Date();
 		exdate.setHours(exdate.getHours()+4);
+    	
     	// reset cookie
-        Y.Cookie.set("_yui_form_option_filter", val, { expires: exdate });
+        var current_val = Y.Cookie.getSub("filter", "current", {expires: exdate, domain: "wordties.cst.dk"});
+    	
+        if(val.lastIndexOf("_aligned") != -1) val = val.substring(0, val.lastIndexOf("_aligned"));
+    	if(current_val != val && current_val) Y.Cookie.setSub("filter", current_val, "false", {expires: exdate, domain: "wordties.cst.dk"})
+    	
+    	Y.Cookie.setSub("filter", val, "true", {expires: exdate, domain: "wordties.cst.dk"});
+    	Y.Cookie.setSub("filter", "current", val, {expires: exdate, domain: "wordties.cst.dk"});
 	 }
 	 
     // Add the yui3-skin-sam class to the body so the default
@@ -69,14 +76,24 @@
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
    
    Y.all('#queryFilter input[type=radio]').each(function (node) {
-    var saved_val = Y.Cookie.get("_yui_form_option_filter", String);
+    var node_val = node.get('value');
+    
+   	if(node_val.lastIndexOf("_aligned") != -1) node_val = node_val.substring(0, node_val.lastIndexOf("_aligned"));
+    
+    var saved_val = Y.Cookie.getSub("filter", node_val, {expires: exdate, domain: "wordties.cst.dk"});
+    
     node.on('change', function () {
         var val = this.get('value');
         doChangeEvent(val);
     })
-	if(saved_val == node.get("value")) { 
+	
+	if(saved_val == "true") { 
 	  node.set("checked", true);
-	  doChangeEvent(saved_val);
+	  doChangeEvent(node.get('value'));
+    } else {
+    	var exdate = new Date();
+		exdate.setHours(exdate.getHours()+4); 
+    	Y.Cookie.setSub("filter", node_val, "false", {expires: exdate, domain: "wordties.cst.dk"});
     }
    });
  });
