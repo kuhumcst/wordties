@@ -28,8 +28,8 @@ class WordSensesController < ApplicationController
   end
 
   def find_sense
+    @filter = (!params[:filter].nil?) ? params[:filter] : ""
     @sense = DanNet::WordSense.find_by_heading(@query)
-    @filter = params[:filter]
     if @sense
 	if @sense.syn_set.alignments.nil? && @filter.end_with?('aligned')
 	  redirect_to ord_path(@sense), :status => :moved_permanently
