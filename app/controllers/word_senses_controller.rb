@@ -21,10 +21,8 @@ class WordSensesController < ApplicationController
 
   def search
     if DanNet::Word.find_by_lemma(@query)
-      @query = @query.gsub(/\//, "%2F")
       redirect_to disambiguage_word_sense_path(@filter, @query)
     else
-      @query = @query.gsub(/\//, "%2F")
       redirect_to correct_spelling_path(@query)
     end
   end

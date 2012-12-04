@@ -11,7 +11,5 @@
 // This file is automatically included by javascript_include_tag :defaults
 function gotoWord(word, filter) {
   if(word == undefined || word == null || word == "") { location.href = '/spelling/empty'; return; }
-  else { word = word.replace(/\//g, "%2F"); 
-		 location.href = '/find/' + filter + '/' + word;
-  }
+  else { location.href = '/find/' + filter + '/' + word; }
 }
