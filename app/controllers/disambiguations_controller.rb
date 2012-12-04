@@ -1,6 +1,5 @@
 #coding: utf-8
 class DisambiguationsController < ApplicationController
-  require 'uri'
   before_filter :bind_query
   before_filter :bind_senses, :only => :show
 
