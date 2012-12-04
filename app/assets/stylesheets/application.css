@@ -57,7 +57,7 @@ h2,h3 {
 }
 
 #header #query.with_filters {
-	height: 65px;
+	height: 90px;
 }
 
 #logo {
@@ -129,6 +129,14 @@ h2,h3 {
 	float: left;
 	width: 100%;
 	padding: 5px 20px;
+}
+
+#queryFilter .radio-left, .radio-right {
+	float: left;
+	width: 50%;
+}
+#queryFilter .radio-right {
+	margin-left: -20px
 }
 
 #queryButton { 

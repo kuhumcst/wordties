@@ -19,8 +19,13 @@
                       <div id="querySuggestionsContainer"></div>
                       <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
                       <div id="queryFilter">
-                  		<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application, :wordnet => t(:wordnet, :scope => :application)) %>
-                  		<%= radio_button_tag 'filter_option', 'aligned', params[:filter_option] == 'aligned' %><%= label_tag "label_aligned", t(:search_filter, :scope => :application) %>
+                  		<div class="radio-left">
+                  			<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application, :wordnet => t(:wordnet, :scope => :application)) %>
+                  		</div>
+                  		<div class="radio-right">
+                  			<%= radio_button_tag 'filter_option', 'corepwn_aligned', params[:filter_option] == 'corepwn_aligned' %><%= label_tag "label_corepwn_aligned", t(:search_filter_corepwn, :scope => :application) %><br/>
+                  			<%= radio_button_tag 'filter_option', 'ml_aligned', params[:filter_option] == 'ml_aligned' %><%= label_tag "label_ml_aligned", t(:search_filter_ml, :scope => :application) %>
+                  		</div>
                  	  </div>
                   </div>
                 <% end -%> 
@@ -33,7 +38,9 @@
           <script>
               $('search_form').observe('submit', function(e) {
                   e.stop();
-                  gotoWord($F('queryInput'), $$('#queryFilter input[name=filter_option]:checked').first().value);
+                  var filter = $$('#queryFilter input[name=filter_option]:checked').first().value;
+                  if(filter != 'fullsearch') filter = filter.substring(filter.lastIndexOf('_')+1, filter.length);
+                  gotoWord($F('queryInput'), filter);
               })
           </script>
           <div id="main">
