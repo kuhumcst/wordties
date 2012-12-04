@@ -41,13 +41,13 @@
 		exdate.setHours(exdate.getHours()+4);
     	
     	// reset cookie
-        var current_val = Y.Cookie.getSub("filter", "current", {expires: exdate, domain: "wordties.cst.dk"});
+        var current_val = Y.Cookie.getSub("filter", "current", {domain: "wordties.cst.dk"});
     	
         if(val.lastIndexOf("_aligned") != -1) val = val.substring(0, val.lastIndexOf("_aligned"));
     	if(current_val != val && current_val != null) Y.Cookie.setSub("filter", current_val, "false", {expires: exdate, domain: "wordties.cst.dk"})
     	
-    	Y.Cookie.setSub("filter", val, "true", {expires: exdate, domain: "wordties.cst.dk"});
-    	Y.Cookie.setSub("filter", "current", val, {expires: exdate, domain: "wordties.cst.dk"});
+    	Y.Cookie.setSub("filter", val, "true", {domain: "wordties.cst.dk"});
+    	Y.Cookie.setSub("filter", "current", val, {domain: "wordties.cst.dk"});
 	 }
 	 
     // Add the yui3-skin-sam class to the body so the default
@@ -80,7 +80,7 @@
     
    	if(node_val.lastIndexOf("_aligned") != -1) node_val = node_val.substring(0, node_val.lastIndexOf("_aligned"));
     
-    var saved_val = Y.Cookie.getSub("filter", node_val, {expires: exdate, domain: "wordties.cst.dk"});
+    var saved_val = Y.Cookie.getSub("filter", node_val, {domain: "wordties.cst.dk"});
     
     node.on('change', function () {
         var val = this.get('value');
@@ -93,7 +93,7 @@
     } else {
     	var exdate = new Date();
 		exdate.setHours(exdate.getHours()+4); 
-    	Y.Cookie.setSub("filter", node_val, "false", {expires: exdate, domain: "wordties.cst.dk"});
+    	Y.Cookie.setSub("filter", node_val, "false", {domain: "wordties.cst.dk"});
     }
    });
  });
