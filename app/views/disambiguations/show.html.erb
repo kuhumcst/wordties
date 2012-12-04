@@ -5,7 +5,7 @@
 <% if !@filter.end_with? 'aligned' %> 
 	<%= raw(t(:filter_none, :scope => :disambiguations, :query => @query))%>	
 <% else %>
-	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query))%>	
+	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query, :filter => t(@filter, :scope => 'application.search_filter')))%>	
 <% end %>
 <%=t :choose_one, :scope => :disambiguations %></p>
 <ol>
