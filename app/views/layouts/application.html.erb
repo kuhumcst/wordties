@@ -12,9 +12,12 @@
   <body>
     <div id="scene">
       <div id="header">
-          <div id="query" class="with_filters">
+          <div id="query" class="with_filters content">
+          		<style scoped>
+					#queryInput { width: 250px; }
+				</style>
                 <%= form_tag '', :method => :get, :id => :search_form do -%>
-                  <div id="querySuggestions">
+				  <div id="querySuggestions">
                       <input id="queryInput" type="text"/>
           			  <%= render :partial => 'layouts/query_autocompleter' %>
                   </div>
@@ -27,8 +30,6 @@
               			<%= radio_button_tag 'filter_option', 'corepwn_aligned', params[:filter_option] == 'corepwn_aligned' %><%= label_tag "label_corepwn_aligned", t(:corepwn_aligned, :scope => 'application.search_filter') %><br/>
               			<%= radio_button_tag 'filter_option', 'ml_aligned', params[:filter_option] == 'ml_aligned' %><%= label_tag "label_ml_aligned", t(:ml_aligned, :scope => 'application.search_filter') %>
               		</div>
-             	  </div>
-                  </div>
                 <% end -%> 
             </div>
             <div id="logo">
