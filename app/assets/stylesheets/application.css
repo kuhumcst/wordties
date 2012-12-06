@@ -17,10 +17,12 @@ body {
 	background-color: #EEEEEE;
 	font-family: Georgia,"Times New Roman",Times,serif;
 	font-size: 16px;
+	height: 100%;
 }
 
 #scene {
 	width: 860px;
+	min-height: 100%;
 	margin: 20px auto 0 auto;
 }
 
@@ -117,10 +119,6 @@ h2,h3 {
 	-moz-border-radius: 10px;
 	-webkit-box-shadow: 7px 7px 7px #666;
 	-moz-box-shadow: 7px 7px 7px #666;
-}
-
-#queryInput, #querySuggestionsContainer {
-    width:20em
 }
 
 #queryFilter {
