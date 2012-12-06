@@ -16,13 +16,16 @@
           		<style scoped>
 					#queryInput { width: 250px; }
 				</style>
-                <%= form_tag '', :method => :get, :id => :search_form do -%>
-				  <div id="querySuggestions">
+                <div id="querySuggestions">
                       <input id="queryInput" type="text"/>
           			  <%= render :partial => 'layouts/query_autocompleter' %>
-                  </div>
-                  <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
-                  <div id="queryFilter">
+                </div>
+                <div id="queryButton">
+                  	<%= form_tag '', :method => :get, :id => :search_form do -%>
+				  	<%= submit_tag t(:search_btn, :scope => :application) %>
+                	<% end -%>
+                </div>
+                <div id="queryFilter">
               		<div class="radio-left">
               			<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application, :wordnet => t(:wordnet, :scope => :application)) %>
               		</div>
@@ -30,8 +33,7 @@
               			<%= radio_button_tag 'filter_option', 'corepwn_aligned', params[:filter_option] == 'corepwn_aligned' %><%= label_tag "label_corepwn_aligned", t(:corepwn_aligned, :scope => 'application.search_filter') %><br/>
               			<%= radio_button_tag 'filter_option', 'ml_aligned', params[:filter_option] == 'ml_aligned' %><%= label_tag "label_ml_aligned", t(:ml_aligned, :scope => 'application.search_filter') %>
               		</div>
-              	   </div>
-                <% end -%> 
+              	 </div>
             </div>
             <div id="logo">
               <%= link_to(t(:title, :scope => :application), '/') %>
