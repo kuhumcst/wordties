@@ -24,12 +24,11 @@
 	    // Use string substitution to fill out the search template and
 	    // return an HTML string for this result.
 	    var matchIdx = searchResult.indexOf(query)
-	    var resultStr = Y.Lang.sub(searchItemTemplate, {
+	    return Y.Lang.sub(searchItemTemplate, {
 	    	query:	query,
 	    	before: searchResult.substr(0, matchIdx),
 	        after: 	searchResult.substr(matchIdx + query.length)
 	    });
-	    return resultStr;
 	  });
 	 }
 	 
@@ -49,8 +48,7 @@
 	 
     // Add the yui3-skin-sam class to the body so the default
     // AutoComplete widget skin will be applied.
-    //Y.one('body').addClass('yui3-skin-sam');
-    Y.one('#querySuggestions').addClass('yui3-skin-sam');
+    Y.one('body').addClass('yui3-skin-sam');
     
     // Use an DataSource
     var oDS = new Y.DataSource.IO({source: "<%= word_suggestions_path %>/" + Y.one('#queryFilter input[name=filter_option]:checked').get("value")});
