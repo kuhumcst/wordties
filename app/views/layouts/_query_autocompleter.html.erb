@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
  // Create a new YUI instance and populate it with the required modules.
  YUI().use('event', 'cookie', 'datasource', 'autocomplete', 'autocomplete-highlighters', function (Y) {
      var searchItemTemplate = 
@@ -48,7 +48,7 @@
 	 
     // Add the yui3-skin-sam class to the body so the default
     // AutoComplete widget skin will be applied.
-    Y.one('body').addClass('yui3-skin-sam');
+    Y.one('#querySuggestions').addClass('yui3-skin-sam');
     
     // Use an DataSource
     var oDS = new Y.DataSource.IO({source: "<%= word_suggestions_path %>/" + Y.one('#queryFilter input[name=filter_option]:checked').get("value")});
