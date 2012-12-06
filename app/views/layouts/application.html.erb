@@ -14,7 +14,7 @@
       <div id="header">
           <div id="query" class="with_filters">
                 <%= form_tag '', :method => :get, :id => :search_form do -%>
-                  <div id="querySuggestions">
+                  <div id="querySuggestions" class="yui3-skin-sam">
                       <input id="queryInput" type="text"/>
                       <div id="querySuggestionsContainer"></div>
                       <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
