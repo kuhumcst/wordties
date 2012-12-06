@@ -15,7 +15,7 @@
           <div id="query" class="with_filters">
                 <%= form_tag '', :method => :get, :id => :search_form do -%>
                   <div id="querySuggestions">
-                      <div id="querySuggestionsContainer"><input id="queryInput" type="text"/></div>
+                      <input id="queryInput" type="text"/>
                       <div id="queryButton"> <%= submit_tag t(:search_btn, :scope => :application) %></div>
                       <div id="queryFilter">
                   		<div class="radio-left">
@@ -27,7 +27,8 @@
                   		</div>
                  	  </div>
                   </div>
-                <% end -%> 
+                <% end -%>
+          		<%= render :partial => 'layouts/query_autocompleter' %>
             </div>
             <div id="logo">
               <%= link_to(t(:title, :scope => :application), '/') %>
@@ -49,7 +50,6 @@
               <%=raw [mail_to('anders@johannsen.com', 'Anders Johannsen', :encode => 'javascript'), mail_to('seaton@hum.ku.dk', 'Mitchell Seaton', :encode => 'javascript')].to_sentence %><br/>
               <%= t(:data_from, :scope => :application) %> <%= link_to t(:wordnet, :scope => :application), 'http://wordnet.dk' %>
           </div>
-          <%= render :partial => 'layouts/query_autocompleter' %>
     </div>
     <%= render :partial => 'layouts/google_analytics' %>
     </body>
