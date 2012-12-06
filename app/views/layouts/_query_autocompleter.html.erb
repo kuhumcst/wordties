@@ -24,12 +24,12 @@
 	    // Use string substitution to fill out the search template and
 	    // return an HTML string for this result.
 	    var matchIdx = searchResult.indexOf(query)
-	        
-	    return Y.Lang.sub(searchItemTemplate, {
+	    var resultStr = Y.Lang.sub(searchItemTemplate, {
 	    	query:	query,
 	    	before: searchResult.substr(0, matchIdx),
 	        after: 	searchResult.substr(matchIdx + query.length)
 	    });
+	    return resultStr;
 	  });
 	 }
 	 
