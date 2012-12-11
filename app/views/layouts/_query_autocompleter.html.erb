@@ -66,10 +66,18 @@
     resultHighlighter: 'wordMatch',
     resultFormatter: searchFormatter,
     requestTemplate: '/{query}',
-    source: oDS
-   });
-   
+    source: oDS,
+    zIndex:10, // don't auto-align to the inputNode
+    render: '#querySuggestions'
+   })
+   /*Y.one('#queryInput').ac.on('visibleChange', function (e) {
+        if (e.newVal) {
+            // Specify arbitrary x/y coords for the result list.
+            Y.one('#queryInput').ac.get('boundingBox').setXY([50, 50]);
+        }
+   });*/
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
+   Y.one('#queryInput').ac.render();
    
    Y.all('#queryFilter input[type=radio]').each(function (node) {
     var node_val = node.get('value');
