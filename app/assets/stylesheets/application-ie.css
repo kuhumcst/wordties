@@ -2,3 +2,8 @@
 *= require_self
 *= require_tree ./ie
 */
+
+#flashContent {
+	position: relative; 
+	z-index: 0;
+}
