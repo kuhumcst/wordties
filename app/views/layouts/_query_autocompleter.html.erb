@@ -68,15 +68,15 @@
     requestTemplate: '/{query}',
     source: oDS,
     zIndex:10, // don't auto-align to the inputNode
-    align: { node: '#querySuggestions', points: ['tl', 'tl'] },
+    align: false,
     render: '#querySuggestions'
    })
-   /*Y.one('#queryInput').ac.on('visibleChange', function (e) {
+   Y.one('#queryInput').ac.on('visibleChange', function (e) {
         if (e.newVal) {
             // Specify arbitrary x/y coords for the result list.
             Y.one('#queryInput').ac.get('boundingBox').setXY([50, 50]);
         }
-   });*/
+   });
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
    Y.one('#queryInput').ac.render();
    
