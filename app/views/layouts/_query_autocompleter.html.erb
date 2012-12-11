@@ -68,15 +68,16 @@
     requestTemplate: '/{query}',
     source: oDS,
     zIndex:10, // don't auto-align to the inputNode
-    align: false,
+    //align: false,
     render: '#querySuggestions'
    })
-   Y.one('#queryInput').ac.on('visibleChange', function (e) {
+   /*Y.one('#queryInput').ac.on('visibleChange', function (e) {
+        var input = Y.one('#queryInput');
         if (e.newVal) {
             // Specify arbitrary x/y coords for the result list.
-            Y.one('#queryInput').ac.get('boundingBox').setXY([50, 50]);
+            input.ac.get('boundingBox').setXY([input.getX(), input.getY()]);
         }
-   });
+   });*/
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
    Y.one('#queryInput').ac.render();
    
