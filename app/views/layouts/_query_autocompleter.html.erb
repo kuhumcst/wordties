@@ -76,7 +76,7 @@
         if (e.newVal) {
             // Specify arbitrary x/y coords for the result list.
             var dx = input.getX();
-            var dy = input.getY() + parseInt(input.getComputedStyle('height').split('px')[0]);
+            var dy = input.getY() + parseFloat(input.getComputedStyle('height').split('px')[0]);
             console.log(dy);
             
             input.ac.get('boundingBox').setXY([dx, dy]);
