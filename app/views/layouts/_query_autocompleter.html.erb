@@ -78,7 +78,7 @@
             var margin_top = 6, margin_right = 5;
             var dx = input.getX();
             var dy = input.getY() + parseFloat(input.getComputedStyle('height').split('px')[0]) + margin_top;
-            input.ac.get('boundingBox').setXY([dx+1, dy]);
+            input.ac.get('boundingBox').setXY([dx, dy]);
             input.ac.get('boundingBox').set('offsetWidth', parseFloat(input.getComputedStyle('width').split('px')[0]) + margin_right);
         }
    });
