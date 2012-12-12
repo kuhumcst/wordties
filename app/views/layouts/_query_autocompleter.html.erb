@@ -75,12 +75,11 @@
         var input = Y.one('#queryInput');
         if (e.newVal) {
             // Specify arbitrary x/y coords for the result list.
-            var margin_top = 5;
+            var margin_top = 6, margin_right = 4;
             var dx = input.getX();
             var dy = input.getY() + parseFloat(input.getComputedStyle('height').split('px')[0]) + margin_top;
-            console.log(dy);
-            
             input.ac.get('boundingBox').setXY([dx, dy]);
+            input.ac.get('boundingBox').set('offsetWidth', parseFloat(input.getComputedStyle('width').split('px')[0]) + margin_right);
         }
    });
    Y.one('#queryInput').ac.on("select", selectSearchTerm);
