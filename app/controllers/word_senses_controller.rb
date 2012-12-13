@@ -45,7 +45,7 @@ class WordSensesController < ApplicationController
 
   def best_for_syn_set
     syn_set = DanNet::SynSet.find(params[:syn_set_id])
-    filter = params[:filter]
+    filter = (params[:filter].nil?) ? Rails.configuration.search_filter_default : params[:filter]
     #filter = syn_set.getFilterByAlignments(params[:filter])
     redirect_to w_filter_path(filter, syn_set.word_senses.first), :status => :moved_permanently
   end
