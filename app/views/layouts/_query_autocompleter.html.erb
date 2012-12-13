@@ -53,7 +53,9 @@
     });
     
    // AutoComplete instance 
-   Y.one('#queryInput').plug(Y.Plugin.AutoComplete, {
+   var inputNode = Y.one('#queryInput');
+   inputNode.plug(Y.Plugin.AutoComplete, {
+    activateFirstItem: true,
     resultHighlighter: 'wordMatch',
     resultFormatter: searchFormatter,
     requestTemplate: '/{query}',
@@ -61,8 +63,8 @@
     zIndex:10, // don't auto-align to the inputNode
     align: false,
     render: '#querySuggestions'
-   })
-   Y.one('#queryInput').ac.on('visibleChange', function (e) {
+   });
+   inputNode.ac.on('visibleChange', function (e) {
         var input = Y.one('#queryInput');
         if (e.newVal) {
             // Specify arbitrary x/y coords for the result list.
@@ -73,8 +75,15 @@
             input.ac.get('boundingBox').set('offsetWidth', parseFloat(input.getComputedStyle('width').split('px')[0]) + margin_right);
         }
    });
-   Y.one('#queryInput').ac.on("select", selectSearchTerm);
-   Y.one('#queryInput').ac.render();
+   inputNode.ac.on('results', function (e) {
+        if (e.results.length) {
+            lastValue = inputNode.ac.get('value');
+        } else {
+            inputNode.set('value', lastValue);
+        }
+    });
+   inputNode.ac.on("select", selectSearchTerm);
+   inputNode.ac.render();
    
    Y.all('#queryFilter input[type=radio]').each(function (node) {
     var node_val = node.get('value');
