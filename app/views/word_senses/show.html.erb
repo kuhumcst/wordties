@@ -9,7 +9,7 @@
 <% unless @synonyms.empty? %>
     <div class="analysisBox">
         <h3><%= t(:syn_collection, :scope => 'word_senses.headings').capitalize %></h3>
-        <%= raw(@synonyms.collect {|ws| link_to ws.word.lemma, ord_path(ws)}.to_sentence) %>
+        <%= raw(@synonyms.collect {|ws| link_to ws.word.lemma, w_filter_path(ws.syn_set.getFilterByAlignments(@filter), ws)}.to_sentence) %>
     </div>
 <% end %>
 <% unless @syn_set.examples.empty? %>
@@ -35,15 +35,15 @@
 	          	   :scope => :word_senses,
 	          	   :count => min_path.size,
 	          	   :max_count => max_path.size,
-	          	   :min_path => raw("(via #{format_path_to_top(min_path)})"),
-	          	   :max_path => raw("(#{format_path_to_top(max_path)})"),
+	          	   :min_path => raw("(via #{format_path_to_top(min_path, @filter)})"),
+	          	   :max_path => raw("(#{format_path_to_top(max_path, @filter)})"),
 	          	   :lemma => @sense.word.lemma) %>
 	        <% elsif @paths_to_top.size == 1 %>
 	          <% path_to_top = @paths_to_top.first %>
 	            <%= raw t(:super_concept_top, 
 	            	 :scope => :word_senses,
 	            	 :count => path_to_top.size,
-	            	 :path => raw("(#{format_path_to_top(path_to_top)})"), 
+	            	 :path => raw("(#{format_path_to_top(path_to_top, @filter)})"), 
 	          	     :lemma => @sense.word.lemma) %>
 	        <% end %>
 	    <% end %>

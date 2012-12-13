@@ -27,11 +27,20 @@
                 </div>
                 <div id="queryFilter">
               		<div class="radio-left">
-              			<%= radio_button_tag 'filter_option', 'fullsearch', params[:filter_option] == nil %><%= label_tag "label_fullsearch", t(:search_nofilter, :scope => :application, :wordnet => t(:wordnet, :scope => :application)) %>
+              			<%= radio_button_tag 'filter_option', Rails.configuration.search_filter_default, (params[:filter] == Rails.configuration.search_filter_default ||  params[:filter].nil? || (!params[:filter].eql?(Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix) && !params[:filter].eql?(Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix))) %><%= label_tag "label_fullsearch", t(Rails.configuration.search_filter_default_key, :scope => :application, :wordnet => t(:wordnet, :scope => :application)) %>
               		</div>
               		<div class="radio-right">
-              			<%= radio_button_tag 'filter_option', 'corepwn_aligned', params[:filter_option] == 'corepwn_aligned' %><%= label_tag "label_corepwn_aligned", t(:corepwn_aligned, :scope => 'application.search_filter') %><br/>
-              			<%= radio_button_tag 'filter_option', 'ml_aligned', params[:filter_option] == 'ml_aligned' %><%= label_tag "label_ml_aligned", t(:ml_aligned, :scope => 'application.search_filter') %>
+              			<%= radio_button_tag 'filter_option', 
+              								 Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix,
+              				 				 params[:filter] == Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix 
+              			%>
+              			<%= label_tag "label_corepwn_aligned", t(Rails.configuration.search_filter_corepwn_key, :scope => 'application.search_filter') %>
+              			<br/>
+              			<%= radio_button_tag 'filter_option', 
+              								 Rails.configuration.search_filter_ml + Rails.configuration.search_filter_aligned_postfix,
+              								 params[:filter] == Rails.configuration.search_filter_ml + Rails.configuration.search_filter_aligned_postfix 
+              			%>
+              			<%= label_tag "label_ml_aligned", t(Rails.configuration.search_filter_ml_key, :scope => 'application.search_filter') %>
               		</div>
               	 </div>
             </div>

@@ -5,7 +5,7 @@
             <ul>
               <% for hyponym in @hyponyms %>
                 <li>
-                    <%= raw(link_word_sense_lemmas(hyponym.word_senses).to_sentence) %>:
+                    <%= raw(link_word_sense_lemmas(hyponym.word_senses, @filter).to_sentence) %>:
                     <em><%= hyponym.gloss %></em>
                 </li>
               <% end %>

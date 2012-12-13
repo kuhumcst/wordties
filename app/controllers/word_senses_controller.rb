@@ -4,10 +4,13 @@ class WordSensesController < ApplicationController
   before_filter :find_sense, :only => :search
 
   def show
+    @filter = params[:filter]
     @sense  = DanNet::WordSense.find(params[:id])
+
     if params[:id] != @sense.to_param
-      redirect_to ord_path(@sense), :status=> :moved_permanently
+	redirect_to w_filter_path(@filter, @sense), :status=> :moved_permanently
     end
+
     @syn_set  = @sense.syn_set
     @alignments_wordnet = @syn_set.alignments.where({:through_source_id => nil})
     @alignments_through = @syn_set.alignments.where({:through_source_id => "wordnet30"}).sort_by(&:source)
@@ -28,20 +31,23 @@ class WordSensesController < ApplicationController
   end
 
   def find_sense
-    @filter = (!params[:filter].nil?) ? params[:filter] : ""
+    @filter = (!params[:filter].nil?) ? params[:filter] : "full"
     @sense = DanNet::WordSense.find_by_heading(@query)
     if @sense
-	if @sense.syn_set.alignments.nil? && @filter.end_with?('aligned')
-	  redirect_to ord_path(@sense), :status => :moved_permanently
-	elsif !@filter.end_with?('aligned')  
-      	  redirect_to ord_path(@sense), :status => :moved_permanently
+	# TODO: clean up code seg/redirection
+	if @sense.syn_set.alignments.nil? && @filter.end_with?(Rails.configuration.search_filter_aligned_postfix)
+	  redirect_to w_filter_path(@filter, @sense), :status => :moved_permanently
+	elsif !@filter.end_with?(Rails.configuration.search_filter_aligned_postfix)  
+      	  redirect_to w_filter_path(@filter, @sense), :status => :moved_permanently
 	end  
     end  
   end
 
   def best_for_syn_set
     syn_set = DanNet::SynSet.find(params[:syn_set_id])
-    redirect_to ord_path(syn_set.word_senses.first), :status => :moved_permanently
+    filter = params[:filter]
+    #filter = syn_set.getFilterByAlignments(params[:filter])
+    redirect_to w_filter_path(filter, syn_set.word_senses.first), :status => :moved_permanently
   end
 
   private
@@ -61,7 +67,8 @@ class WordSensesController < ApplicationController
     @related_syn_sets['children'] = Array.new
     graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
       syn_sets.each do |syn_set|
-	link = !syn_set.internal? ? ord_path(syn_set.word_senses.preferred) : ''
+	#filter = syn_set.getFilterByAlignments(@filter)
+	link = !syn_set.internal? ? w_filter_path(@filter, syn_set.word_senses.preferred) : ''
 	@related_syn_sets['children'].push({	
 	  'name'     => syn_set.pretty_label,
           'link'     => link,
@@ -74,20 +81,21 @@ class WordSensesController < ApplicationController
     end
   end
 
-  def bind_related_syn_sets_protovis
-    graph = DanNet::WordSenseGraph.new(@sense)
-    related_syn_sets = Hash.new {|h,k| h[k] = {} }
-    graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
-      syn_sets.each do |syn_set|
-	link = !syn_set.internal? ? ord_path(syn_set.word_senses.preferred) : ''
-        related_syn_sets[t(rel_type.name)][syn_set.pretty_label] = {
-          'link'     => link,
-          'synonyms' => syn_set.words.map(&:lemma)*',',
-          'gloss'    => syn_set.gloss
-        }
-      end
-    end
-    related_syn_sets
-  end
+###Deprecated Protovis graph vis method
+#  def bind_related_syn_sets_protovis
+#    graph = DanNet::WordSenseGraph.new(@sense)
+#    related_syn_sets = Hash.new {|h,k| h[k] = {} }
+#    graph.capped_relation_groups(140,100).each do |rel_type,syn_sets|
+#      syn_sets.each do |syn_set|
+#	link = !syn_set.internal? ? w_path(syn_set.word_senses.preferred) : ''
+#        related_syn_sets[t(rel_type.name)][syn_set.pretty_label] = {
+#          'link'     => link,
+#          'synonyms' => syn_set.words.map(&:lemma)*',',
+#          'gloss'    => syn_set.gloss
+#        }
+#      end
+#    end
+#    related_syn_sets
+#  end
 
 end

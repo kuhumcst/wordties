@@ -6,7 +6,7 @@ module DanNet
     
     has_many :alignments do
       def with_through_source(source)
-        find_or_create_by_through_source(source)
+        find_or_create_by_through_source_id(source)
       end
     end
     
@@ -52,6 +52,26 @@ module DanNet
       label =~ /^\{DN:(TOP|abstract_entity|1stOrder|2ndOrder|VERB)/
     end
 
+    #Use for overriding filter param in url
+    #Note: causes longer loading time
+    def getFilterByAlignments(filter)
+      return filter if filter == Rails.configuration.search_filter_default
+
+      if alignments.empty?
+        f = Rails.configuration.search_filter_default
+      else 
+        if !alignments.where({:through_source_id => "wordnet30"}).empty? && 
+		filter != (Rails.configuration.search_filter_corepwn + 
+			     Rails.configuration.search_filter_aligned_postfix)
+          f = Rails.configuration.search_filter_ml
+        else
+          f = Rails.configuration.search_filter_corepwn
+        end
+        f += Rails.configuration.search_filter_aligned_postfix
+      end
+      f
+    end
+    
     def paths_to_top(exclude_internal=true)
       paths_to_top_recursive.collect {|path|
         path[1..-1].select {|syn_set|
@@ -74,7 +94,7 @@ module DanNet
       paths
     end
 
-    def hyponyms_below(max_level = 4, min_count = 2)
+    def hyponyms_below(filter=Rails.configuration.search_filter_default, max_level = 4, min_count = 2)
       rel_hyponym_id = RelationType.find_by_name("has_hyponym").id
       sql = """
 WITH RECURSIVE t(level,id,parent_id) as (
@@ -94,7 +114,7 @@ WITH RECURSIVE t(level,id,parent_id) as (
         JOIN syn_sets s
           ON t.id = s.id
       """
-      HyponymTree.new(SynSet.find_by_sql(sql))
+      HyponymTree.new(SynSet.find_by_sql(sql), filter)
     end
 
     def shortest_path_to(dst)

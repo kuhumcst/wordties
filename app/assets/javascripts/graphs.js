@@ -1,4 +1,4 @@
-function rel_graph(data, labels) {
+function rel_graph(data, labels, asset_path) {
 	var colors;
 	
 	function create(colors) {
@@ -90,7 +90,7 @@ function rel_graph(data, labels) {
 		      .attr("transform", "translate(15, 0)");	 
 	}
 	
-	d3.json('../assets/rel-colors.json', function(json) {
+	d3.json(asset_path, function(json) {
 		// List of Rel Types
 		var rels = json.children.map(function(d) { return d.rel; });
 		var color_range = json.children.map(function(d) { return d.color; });
