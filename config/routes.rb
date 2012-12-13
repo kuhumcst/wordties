@@ -5,29 +5,44 @@ Andreord::Application.routes.draw do
       get :export
     end
   end
-  resources :word_suggestions
+
+  resources :word_suggestions, only: [:index]
   match '/word_suggestions/:query' => 'word_suggestions#filter', :default => {:filter => :fullsearch}, :as => :word_suggestions_query
   match '/word_suggestions/:filter/:query' => 'word_suggestions#filter', :as => :word_suggestions_query
-  resources :ord,
+  
+  resources :w,
     :controller => 'word_senses'
-  resources :den_danske_ordbog, 
-    :controller => 'ddo_mappings'
+
+  #resources :den_danske_ordbog, 
+  #  :controller => 'ddo_mappings'
+  #resources :sitemaps, only: [:index]
+  #resources :synonyms, only: [:show]
+
+  match '/w/:filter/:id' => 'word_senses#show', :as => :w_filter
+  match "/ord/:id" => redirect("/w/"+Rails.configuration.search_filter_default+"/%{id}"), :as => :word_da_redirect
+  match "/word/:id" => redirect("/w/"+Rails.configuration.search_filter_default+"/%{id}"), :as => :word_redirect
 
   match '/find-all/:query' => 'word_senses#search', :default => {:query => :empty}, :as => :without_filter
-  match '/find/:filter/:query' => 'word_senses#search', :default => {:query => :empty, :filter => :fullsearch}, :as => :find_heading
-  match '/synset/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set
-  match '/begreb/:syn_set_id' => 'word_senses#best_for_syn_set', :as => :best_for_syn_set_da
-  match '/disambiguation/:query' => 'disambiguations#show', :default => {:filter => :fullsearch}, :as => :disambiguage_word_sense
+  match '/find/:filter/:query' => 'word_senses#search', :default => {:query => :empty, :filter => Rails.configuration.search_filter_default}, :as => :find_heading
+
+  match '/synset/:syn_set_id' => 'word_senses#best_for_syn_set', :default => {:filter => Rails.configuration.search_filter_default}, :as => :best_for_syn_set
+  match '/s/:syn_set_id/:filter' => 'word_senses#best_for_syn_set', :default => {:filter => Rails.configuration.search_filter_default}, :as => :best_for_syn_set_filter
+  match '/begreb/:syn_set_id/:filter' => 'word_senses#best_for_syn_set', :default => {:filter => :full}, :as => :best_for_syn_set_da
+  
+  match '/disambiguation/:query' => 'disambiguations#show', :default => {:filter => :full}, :as => :disambiguage_word_sense
   match '/disambiguation/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense
-  match '/flertydighed/:query' => 'disambiguations#show', :default => {:filter => :fullsearch}, :as => :disambiguage_word_sense_da
+  match '/flertydighed/:query' => 'disambiguations#show', :default => {:filter => Rails.configuration.search_filter_default}, :as => :disambiguage_word_sense_da
   match '/flertydighed/:filter/:query' => 'disambiguations#show', :as => :disambiguage_word_sense_da
+  
   match '/spelling/:query' => 'wrong_spellings#show', :as => :correct_spelling
   match '/stavning/:query' => 'wrong_spellings#show', :as => :correct_spelling_da
-  resources :sitemaps
-  resources :synonyms
+  
   match 'sitemap_index.xml' => 'sitemap_index#show', :as => :sitemap_index
+
   root :to => 'word_senses#index'
-#  match '/:controller(/:action(/:id))'
+
+
+  #match '/:controller(/:action(/:id))'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

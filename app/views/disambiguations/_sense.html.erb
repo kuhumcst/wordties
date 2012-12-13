@@ -1,4 +1,4 @@
 <li>
-    <big><%= link_to sense.heading, ord_path(sense) %></big>
+    <big><%= link_to sense.heading, w_filter_path(@filter, sense.id) %></big>
     <p><%= sense.syn_set.gloss %></p>
 </li>

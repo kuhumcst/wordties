@@ -1,7 +1,8 @@
 class HyponymTree
   include Rails.application.routes.url_helpers
   attr_reader :syn_sets
-  def initialize(syn_sets)
+  def initialize(syn_sets, filter)
+    @filter = filter
     @syn_sets = syn_sets
 #####Set for custom sub-dir
 #    Rails.application.routes.default_url_options[:host] = 'localhost:3000'
@@ -19,7 +20,7 @@ class HyponymTree
         ((s.hyponym_count.to_f / top_node.hyponym_count) * circumference) > pixels_per_group
       end
     end.flatten
-    HyponymTree.new(filtered)
+    HyponymTree.new(filtered, @filter)
   end
 
   def top_node
@@ -63,9 +64,12 @@ class HyponymTree
 	h['name'] = key.pretty_label
 	h['hyponym_count'] = key['hyponym_count']
 	h['parent_id'] = key['parent_id']
-	h['link'] = ord_path(key.word_senses.first, :anchor => "begreber")
+	filter = @filter
+########Use for overriding filter param in url	
+	#filter = (!@filter.eql?(Rails.configuration.search_filter_default)) ? DanNet::SynSet.find(key.id).getFilterByAlignments(@filter) : @filter
+	h['link'] = w_filter_path(filter, key.word_senses.first, :anchor => "begreber")
 ########Use for custom sub-dir path config
-#	h['link'] = ord_url(key.word_senses.first, :anchor => "begreber")
+#	h['link'] = w_filter_url(filter, key.word_senses.first, :anchor => "begreber")
       end
       a.push(h)
     end

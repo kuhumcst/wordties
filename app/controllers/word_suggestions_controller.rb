@@ -7,7 +7,7 @@ class WordSuggestionsController < ApplicationController
   end
 
   def filter
-    if params[:filter] == "corepwn_aligned" || params[:filter] == "ml_aligned"
+    if params[:filter].end_with?(Rails.configuration.search_filter_aligned_postfix)
 	lemmas = DanNet::Word.suggest_lemmas_by_part(params[:query], params[:filter])
 	render_text(lemmas)
     else

@@ -2,10 +2,12 @@
 
 <h3><%=t :select_sense, :scope => :disambiguations %></h3>
 <p>
-<% if !@filter.end_with? 'aligned' %> 
-	<%= raw(t(:filter_none, :scope => :disambiguations, :query => @query))%>	
+<% if @filter.eql?(Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix)%>
+	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query, :filter => t(Rails.configuration.search_filter_corepwn_key, :scope => 'application.search_filter')))%>
+<% elsif @filter.eql?(Rails.configuration.search_filter_ml + Rails.configuration.search_filter_aligned_postfix)%>
+	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query, :filter => t(Rails.configuration.search_filter_ml_key, :scope => 'application.search_filter')))%>	
 <% else %>
-	<%= raw(t(:filter_used, :scope => :disambiguations, :query => @query, :filter => t(@filter, :scope => 'application.search_filter')))%>	
+	<%= raw(t(:filter_none, :scope => :disambiguations, :query => @query))%>
 <% end %>
 <%=t :choose_one, :scope => :disambiguations %></p>
 <ol>

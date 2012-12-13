@@ -16,16 +16,29 @@ module DanNet
       end
     end
 
-    
-
     def onthological_clusters
       syn_sets.group_by {|syn_set| syn_set.features.signature }
     end
 
     private
     def self.infix_suggestions(part, filter, limit)
-	if filter      
+	if filter == Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix    
 	  sql = %{  SELECT *
+                FROM
+                  ( SELECT DISTINCT(w2.lemma)
+                    FROM words w1
+                      JOIN word_parts wp ON w1.id = wp.word_id
+                      JOIN words w2 ON wp.part_of_word_id = w2.id
+                    WHERE w1.lemma LIKE ? AND w1.wn_corepwn = TRUE AND w2.wn_corepwn = TRUE
+                  ) word
+                ORDER BY 
+                  POSITION(? in word.lemma) ASC,
+                  LENGTH(word.lemma) - LENGTH(?) ASC,
+                  word.lemma
+                LIMIT ?
+	  }
+        elsif filter == Rails.configuration.search_filter_ml + Rails.configuration.search_filter_aligned_postfix
+          sql = %{  SELECT *
                 FROM
                   ( SELECT DISTINCT(w2.lemma)
                     FROM words w1
@@ -61,13 +74,13 @@ module DanNet
 
     def self.prefix_suggestions(part, filter, limit)
       if filter
-	if filter == 'corepwn_aligned'
+	if filter == Rails.configuration.search_filter_corepwn + Rails.configuration.search_filter_aligned_postfix
 	sql = %{  SELECT DISTINCT(lemma)
                 FROM words
                 WHERE lemma LIKE ? AND wn_corepwn = TRUE
                 ORDER BY lemma
                 LIMIT ?}
-	elsif filter == 'ml_aligned'
+	elsif filter == Rails.configuration.search_filter_ml + Rails.configuration.search_filter_aligned_postfix
 	sql = %{  SELECT DISTINCT(lemma)
                 FROM words
                 WHERE lemma LIKE ? AND wn_aligned = TRUE
