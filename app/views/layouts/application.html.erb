@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="google-site-verification" content="mHzS4U61Xdcd_92xVGJY_vQ7Ws370a0PvljDfAvfULU" />
         <title><%= h(@title||t(:title, :scope => :application)) %></title>
         <link  href="//fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css" >
         <%= stylesheet_link_tag "application" %>
@@ -65,6 +64,5 @@
               <%= t(:data_from, :scope => :application) %> <%= link_to t(:wordnet, :scope => :application), 'http://wordnet.dk' %>
           </div>
     </div>
-    <%= render :partial => 'layouts/google_analytics' %>
     </body>
 </html>
