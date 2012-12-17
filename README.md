@@ -47,6 +47,7 @@ It is recommended to install on a standard Linux distribution.
   `config.i18n.default_locale = :en`
 
 **Import Wordnet data**
+
 Via Rails console in your working directory ($RAILS_APP)
 `$ rails console`:
 > d = Import::DanNetImporter 
