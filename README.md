@@ -1,5 +1,5 @@
 # AndreOrd #
-**AndreOrd**, is a browser application to view the conceptual network of a WordNet and to browse its relational and multilingual links. 
+**AndreOrd**, is a browser application to view the conceptual network of a Wordnet and to browse its relational and multilingual links. 
 AndreOrd has been renamed and deployed as **[WordTies](http://wordties.cst.dk)** for the [METANORD](http://www.meta-nord.eu/) project.
 
 Note: This is a fork of Anders Johannsen's [AndreOrd](https://github.com/andersjo/andreord-public) for continued development 
