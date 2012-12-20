@@ -21,6 +21,10 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
           ul ->
             li -> a href: 'mailto:bspedersen@hum.ku.dk', -> 'Bolette Sandford Pedersen'
         p ->
+          text 'Developer:'
+          ul ->
+            li -> a href: 'mailto:seaton@hum.ku.dk', -> 'Mitchell Seaton'
+        p ->
           text 'Finnish wordnet:'
           ul ->
             li -> a href: 'mailto:krister.linden@helsinki.fi', -> 'Krister Lindén'
