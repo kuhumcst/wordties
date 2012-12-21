@@ -2,6 +2,7 @@
 //= require effects
 //= require dragdrop
 //= require controls
++//= require yui-min
 //= require d3.v2
 //= require_tree .
 //= require_self
