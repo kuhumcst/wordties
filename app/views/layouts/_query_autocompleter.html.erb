@@ -46,15 +46,39 @@
     	resultFields: [{key:"term"}]
    	 }
     });
-    
+
    // AutoComplete instance 
-   Y.one('#queryInput').plug(Y.Plugin.AutoComplete, {
+   var inputNode = Y.one('#queryInput');
+   inputNode.plug(Y.Plugin.AutoComplete, {
+    activateFirstItem: true,
     resultHighlighter: 'wordMatch',
     resultFormatter: searchFormatter,
     requestTemplate: '?query={query}',
-    source: oDS
-   })
-   
-   Y.one('#queryInput').ac.on("select", selectSearchTerm);
+    source: oDS,
+    zIndex:10, // don't auto-align to the inputNode
+    align: false,
+    render: '#querySuggestions'
+   });
+   inputNode.ac.on('visibleChange', function (e) {
+        var input = Y.one('#queryInput');
+        if (e.newVal) {
+            // Specify arbitrary x/y coords for the result list.
+            var margin_top = 6, margin_right = 4;
+            var dx = input.getX();
+            var dy = input.getY() + parseFloat(input.getComputedStyle('height').split('px')[0]) + margin_top;
+            input.ac.get('boundingBox').setXY([dx, dy]);
+            input.ac.get('boundingBox').set('offsetWidth', parseFloat(input.getComputedStyle('width').split('px')[0]) + margin_right);
+        }
+   });
+   inputNode.ac.on('results', function (e) {
+        if (e.results.length) {
+            lastValue = inputNode.ac.get('value');
+        } else {
+            inputNode.set('value', lastValue);
+        }
+    });
+   inputNode.ac.on("select", selectSearchTerm);
+   inputNode.ac.render();
+    
  });
 </script>
