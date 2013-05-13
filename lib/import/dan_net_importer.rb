@@ -16,6 +16,7 @@ module Import
 
     REVERSE_RELATIONS = { 'holo' => 'mero', 'hypero' => 'hypo',
       'mero' => 'holo', 'hypo'   => 'hypero'}
+    #REVERSE_RELATIONS = {'hypero' => 'hypo', 'hypo' => 'hypero'}
 
     def initialize
       change_log(File.new('importer.out', 'w'))
