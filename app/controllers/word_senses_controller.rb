@@ -23,7 +23,15 @@ class WordSensesController < ApplicationController
   end
 
   def search
-    if DanNet::Word.find_by_lemma(@query)
+    if @filter.end_with?(Rails.configuration.search_filter_eng_postfix)
+      	@alignment = DanNet::Alignment.where({:lemma => @query, :source_id => "wordnet30"}).first # limit 1
+	if @alignment
+	  @syn_set = DanNet::SynSet.find(@alignment.syn_set_id)
+      	  redirect_to best_for_syn_set_filter_path(@syn_set, @filter)
+	else
+	  redirect_to correct_spelling_path(@query)
+	end
+    elsif DanNet::Word.find_by_lemma(@query)
       redirect_to disambiguage_word_sense_path(@filter, @query)
     else
       redirect_to correct_spelling_path(@query)
@@ -37,10 +45,10 @@ class WordSensesController < ApplicationController
 	# TODO: clean up code seg/redirection
 	if @sense.syn_set.alignments.nil? && @filter.end_with?(Rails.configuration.search_filter_aligned_postfix)
 	  redirect_to w_filter_path(@filter, @sense), :status => :moved_permanently
-	elsif !@filter.end_with?(Rails.configuration.search_filter_aligned_postfix)  
+	elsif !@filter.end_with?(Rails.configuration.search_filter_aligned_postfix)
       	  redirect_to w_filter_path(@filter, @sense), :status => :moved_permanently
 	end  
-    end  
+    end
   end
 
   def best_for_syn_set

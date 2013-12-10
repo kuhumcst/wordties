@@ -6,4 +6,7 @@ da:
     data_from: Siden præsenterer data fra
     search_btn: Slå op
     search_nofilter: "Search in full %{wordnet}" 
-    search_filter: Multi-lingual Alignments
+    search_filter: 
+      ml_aligned: Multilingual alignments
+      corepwn_eng: English search
+      corepwn_aligned: CorePWN alignments
