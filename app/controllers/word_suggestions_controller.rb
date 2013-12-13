@@ -10,6 +10,9 @@ class WordSuggestionsController < ApplicationController
     if params[:filter].end_with?(Rails.configuration.search_filter_aligned_postfix)
 	lemmas = DanNet::Word.suggest_lemmas_by_part(params[:query], params[:filter])
 	render_text(lemmas)
+    elsif params[:filter].end_with?(Rails.configuration.search_filter_eng_postfix)
+	lemmas = DanNet::Alignment.suggest_lemmas_by_part(params[:query])
+	render_text(lemmas)
     else
 	index
     end

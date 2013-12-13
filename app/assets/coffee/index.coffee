@@ -22,7 +22,9 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
         p ->
           text 'The builders of these wordnets have applied very different compilation strategies: The Danish, Icelandic and Swedish wordnets are being developed via monolingual dictionaries and corpora and subsequently linked to Princeton WordNet. In contrast, the Finnish and Norwegian wordnets are applying the expand method by translating from '
           a href: 'http://wordnet.princeton.edu/', target: '_blank', 'Princeton WordNet'
-          text ' and the Danish wordnet, DanNet, respectively. The Estonian wordnet was built as part of the EuroWordNet project and by translating the base concepts from English as a first basis for monolingual extension.'
+          text ' and the Danish wordnet, DanNet, respectively. The Estonian wordnet was built as part of the '
+          a href: 'http://www.illc.uva.nl/EuroWordNet/', target: '_blank', 'EuroWordNet' 
+          text ' project and by translating the base concepts from English as a first basis for monolingual extension.'
         h3 'Aim of multilingual wordnets'
         p ->
           text 'The aim of the multilingual action is to test the perspective of a multilingual linking of the Nordic and Baltic wordnets and via this (pilot) linking to perform a tentative comparison and validation of the wordnets along the measures of taxonomical structure, coverage, granularity and completeness. WordTies currently includes '
@@ -37,23 +39,22 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
           a href: 'http://wordnetcode.princeton.edu/standoff-files/core-wordnet.txt', target: '_blank', 'Princeton Core WordNet'
           text ', thereby providing a common, linked coverage of all in all 5,000 core synsets. In the current web interface, 20% of these have been manually validated and are made visible through multilingual links.'
         div '.sources.highlight', ->
-          p ->
+          h3 ->
             text 'Select an available Nordic/Baltic'
             i ' source '
-            text 'wordnet to browse below:'
-            br()
-            ul ->
-              li ->
-                a href: '/wordties-dannet/', 'DanNet'
-                text ' (Danish Wordnet)'
-              li ->
-                a href: '/wordties-fiwn', 'FinnWordNet'
-                text ' (Finnish Wordnet)'
-              li ->
-                a href: '/wordties-estwn/', 'TEKsaurus'
-                text ' (Estonian Wordnet)'
-              li 'Swesaurus* (Swedish Wordnet)'
-            i '*Alignments or relational links via Princeton WordNet are presented in the other available sources above'
+            text 'wordnet to browse below:'          
+          ul ->
+            li ->
+              a href: '/wordties-dannet/', 'DanNet'
+              text ' (Danish Wordnet)'
+            li ->
+              a href: '/wordties-fiwn', 'FinnWordNet'
+              text ' (Finnish Wordnet)'
+            li ->
+              a href: '/wordties-estwn/', 'TEKsaurus'
+              text ' (Estonian Wordnet)'
+            li 'Swesaurus* (Swedish Wordnet)'
+          i '*Alignments or relational links via Princeton WordNet are presented in the other available sources above'
         p '.logos', ->
           a href: 'http://www.meta-nord.eu/', target: '_blank', ->
             img '.logo.metanord', src: '../static-assets/images/metanord_logo.small.jpg', width: '254', height: '45'

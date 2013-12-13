@@ -8,4 +8,5 @@ en:
     search_nofilter: "Search in full %{wordnet}"
     search_filter:
       ml_aligned: Multilingual alignments
+      corepwn_eng: English search
       corepwn_aligned: CorePWN alignments
