@@ -2,11 +2,14 @@ en:
   application:
     title: WordTies
     wordnet: DanNet
-    made_by: is developed by
-    data_from: This site presents data from
+    license: license
+    made_by_html: "Developed by %{authors}."
+    data_from_html: "This site presents data from %{wordnet}."
+    data_from_html: "This site presents data from %{wordnet} (%{license})."
     search_btn: Look up
     search_nofilter: "Search in full %{wordnet}"
     search_filter:
       ml_aligned: Multilingual alignments
       corepwn_eng: English search
       corepwn_aligned: CorePWN alignments
+    data_from: This site presents data from

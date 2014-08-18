@@ -62,10 +62,15 @@
               <%= yield %>
           </div>
           <div id="footer">
-              <%= link_to(t(:title, :scope => :application), '/') %> <%= t(:made_by, :scope => :application) %>
-              <%=raw [mail_to('anders@johannsen.com', 'Anders Johannsen', :encode => 'javascript'), mail_to('seaton@hum.ku.dk', 'Mitchell Seaton', :encode => 'javascript')].to_sentence %><br/>
-              <%= t(:data_from, :scope => :application) %> <%= link_to t(:wordnet, :scope => :application), 'http://wordnet.dk' %>
-          </div>
+              <div class="notice">
+	          <%=t :footer_html, scope: :application, app: link_to('WordTies', '/').html_safe, type: link_to('CLARIN ERIC', 'http://www.clarin.eu', :target => '_blank') %>
+                  <br/><%=t :made_by_html, scope: :application, authors:[mail_to('anders@johannsen.com', 'Anders Johannsen', :encode => 'javascript'), mail_to('seaton@hum.ku.dk', 'Mitchell Seaton', :encode => 'javascript')].to_sentence.html_safe %><br/>
+                  <%=t :data_from_html, scope: :application, wordnet: link_to(t(:wordnet, :scope => :application), 'http://plwordnet.pwr.wroc.pl/wordnet/', :target => '_blank'), license: link_to(t(:license, :scope => :application), 'http://wordnet.dk/dannet/license.txt', :target => '_blank') %>
+	      </div>
+	      <div class="clarin-eric">
+                  <%= link_to image_tag('clarinericlogo-nowhite.png', :size => '254x67', :target => '_blank'), 'http://www.clarin.eu', class: 'logo' %>
+              </div>
+	  </div>
     </div>
     </body>
 </html>

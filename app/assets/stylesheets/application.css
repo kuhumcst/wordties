@@ -109,6 +109,9 @@ h2,h3 {
 	font-size: 12px;
 }
 
+#footer .notice { float:left; width: 540px; }
+#footer .clarin-eric { float:right; width: 260px; margin-top: -10px; margin-right: -20px; }
+
 #main {
 	background-color: white;
 	width: 800px;
