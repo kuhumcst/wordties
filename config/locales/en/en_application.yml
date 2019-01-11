@@ -3,8 +3,9 @@ en:
     title: WordTies
     footer_html: "%{app} has been included as a %{type} showcase."
     wordnet: DanNet
+    license: license
     made_by_html: "Developed by %{authors}."
-    data_from_html: "This site presents data from %{wordnet}."
+    data_from_html: "This site presents data from %{wordnet} (%{license})."
     search_btn: Look up
     search_nofilter: "Search in full %{wordnet}"
     search_filter:
