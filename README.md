@@ -69,8 +69,8 @@ For cmd-line usage help type: `python lib/import/princeton_links.py --help`
   - In your working directory ($RAILS_APP), running the app locally on your machine with `rails server` will start the app at: [localhost:3000](http://localhost:3000)
 	
 **Apache /w Phusion Passenger**
-  - [Phusion Passenger User guide (Apache)](http://www.modrails.com/documentation/Users%20guide%20Apache.html) for details on installation/configuration.
-  - [How to Deploy under a sub-URI](http://www.modrails.com/documentation/Users%20guide%20Apache.html#deploying_rails_to_sub_uri). Also see wiki[Installation#Deploying under sub-URI path]
+  - [Phusion Passenger User guide (Apache)](https://www.phusionpassenger.com/library/config/apache/) for details on installation/configuration.
+  - [How to Deploy under a sub-URI](https://www.phusionpassenger.com/library/config/apache/reference/#passengerprestart).
 
 ## Demonstration
 See the current live demonstration on [wordties.cst.dk](http://wordties.cst.dk).
