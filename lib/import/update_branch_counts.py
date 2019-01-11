@@ -2,7 +2,7 @@ import psycopg2
 import networkx as nx
 import sys
 
-conn = psycopg2.connect("dbname=andreord-dannet-220-b user=andreord")
+conn = psycopg2.connect("dbname=wordties-dannet user=andreord")
 cur = conn.cursor()
 
 G=nx.DiGraph()

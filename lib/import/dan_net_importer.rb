@@ -8,8 +8,6 @@ module Import
 
     DATA_DIR = "/home/seaton/WordTies/git/andreord-public/lib/import/dan_net_data/DanNet-2.2/DanNet-2.2_csv"
     DATA_FILE = "#{DATA_DIR}/DanNet-2.2_csv.zip"
-    #DATA_DIR = "/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd/kb65"
-    #DATA_FILE = "#{DATA_DIR}/estwn_kb65.zip"
     DATA_URL = "http://wordnet.dk/dannet/dannet/DanNet-2.2_csv.zip"
     UNITS = %w{synsets dummies synset_attributes words wordsenses relations}
     DELIMITER = "@"
