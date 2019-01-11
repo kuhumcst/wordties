@@ -12,6 +12,9 @@
 	http://localhost:3000/stylesheets/application.css?1253344805
 	http://localhost:3000/stylesheets/application.css?1253353332
 */
+img {
+    border: none
+}
 
 body {
 	background-color: #EEEEEE;
@@ -64,8 +67,7 @@ h2,h3 {
 
 #logo {
 	float: right;
-	margin-right: 2em;
-	margin-top: 0.5em;
+	margin: 0.5em 2em;
 	font-size: 24px;
 	letter-spacing: 1px;
 	text-transform: lowercase;
@@ -105,9 +107,12 @@ h2,h3 {
 
 #footer {
 	width: 800px;
-	margin: 20px auto 40px auto;
+	margin: 20px 10px 40px 30px;
 	font-size: 12px;
 }
+
+#footer .notice { float:left; width: 540px; }
+#footer .clarin-eric { float:right; width: 260px; margin-top: -10px; margin-right: -20px; }
 
 #main {
 	background-color: white;

@@ -1,9 +1,10 @@
 en:
   application:
     title: WordTies
+    footer_html: "%{app} has been included as a %{type} showcase."
     wordnet: DanNet
-    made_by: is developed by
-    data_from: This site presents data from
+    made_by_html: "Developed by %{authors}."
+    data_from_html: "This site presents data from %{wordnet}."
     search_btn: Look up
     search_nofilter: "Search in full %{wordnet}"
     search_filter:

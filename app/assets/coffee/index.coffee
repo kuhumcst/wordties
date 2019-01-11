@@ -2,7 +2,7 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
   head ->
     meta charset: 'utf-8'
     title 'WordTies'
-    link href: 'css/application.css', media: 'screen', rel: 'stylesheet', type: 'text/css'
+    link href: 'assets/application.css', media: 'screen', rel: 'stylesheet', type: 'text/css'
   body ->
     div '#scene', ->
       div '#header', ->
@@ -22,9 +22,14 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
         p ->
           text 'The builders of these wordnets have applied very different compilation strategies: The Danish, Icelandic and Swedish wordnets are being developed via monolingual dictionaries and corpora and subsequently linked to Princeton WordNet. In contrast, the Finnish and Norwegian wordnets are applying the expand method by translating from '
           a href: 'http://wordnet.princeton.edu/', target: '_blank', 'Princeton WordNet'
-          text ' and the Danish wordnet, DanNet, respectively. The Estonian wordnet was built as part of the '
-          a href: 'http://www.illc.uva.nl/EuroWordNet/', target: '_blank', 'EuroWordNet' 
-          text ' project and by translating the base concepts from English as a first basis for monolingual extension.'
+          text ' and the Danish wordnet, DanNet, respectively. The Estonian wordnet was built as part of the EuroWordNet project and by translating the base concepts from English as a first basis for monolingual extension.'
+        p ->
+          a href: 'http://www.clarin.eu/', target: '_blank', ->
+            img '.logo.clarin-eric', src: 'assets/clarinericlogo.png', width: '254', height: '67'
+          br()
+          text 'WordTies has been included as a '
+          a href:'http://www.clarin.eu', target: '_blank', 'CLARIN ERIC'
+          text ' showcase.'
         h3 'Aim of multilingual wordnets'
         p ->
           text 'The aim of the multilingual action is to test the perspective of a multilingual linking of the Nordic and Baltic wordnets and via this (pilot) linking to perform a tentative comparison and validation of the wordnets along the measures of taxonomical structure, coverage, granularity and completeness. WordTies currently includes '
@@ -57,16 +62,16 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
           i '*Alignments or relational links via Princeton WordNet are presented in the other available sources above'
         p '.logos', ->
           a href: 'http://www.meta-nord.eu/', target: '_blank', ->
-            img '.logo.metanord', src: '../static-assets/images/metanord_logo.small.jpg', width: '254', height: '45'
+            img '.logo.metanord', src: 'assets/metanord_logo.small.jpg', width: '254', height: '45'
           a href: 'http://metanet.eu', target: '_blank', ->
-            img '.logo.metanet', src: '../static-assets/images/metanet_logo.small.jpg', width: '216', height: '45'
+            img '.logo.metanet', src: 'assets/metanet_logo.small.jpg', width: '216', height: '45'
         p '.footnote', 'This work has been performed within the META-NORD project which has received funding from the European Commission through the ICT PSP Programme, grant agreement no 270899.'      
         div '.footer-links', ->
           a href: 'contacts.html', 'Contacts'
           text '&nbsp;|&nbsp;'
           a href: 'publications.html', 'Publications'
       div '#footer', ->
-        a href: 'http://wordties.cst.dk', 'WordTies'
+        a href: '/', 'WordTies'
         text '&nbsp;is developed by&nbsp;'
         a href: 'mailto:anders@johannsen.com', 'Anders Johannsen'
         text '&nbsp;and&nbsp;'

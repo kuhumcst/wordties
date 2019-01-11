@@ -60,6 +60,7 @@ en:
       fi: finnish
       et: estonian
       se: swedish
+      pl: polish
     relation_type_symbols:
       eq_synonym: →
       eq_near_synonym: →

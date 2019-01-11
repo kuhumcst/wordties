@@ -23,7 +23,7 @@ parser.add_option("-v", "--verbose", action="store_true", dest="verbose")
 
 # FILENAME
 # options.filename sample 
-# /home/seaton/git/andreord-public/lib/import/pwn_data/FinWN/corewn-fiwn-sensemap-pwnssids.tsv
+# $HOME/andreord-public/lib/import/pwn_data/FinWN/corewn-fiwn-sensemap-pwnssids.tsv
 
 # SOURCES 
 # options.source samples
@@ -44,7 +44,7 @@ delimiter = "\t"
 PWN_id = "wordnet30"
 
 # Database session
-engine = create_engine('postgresql://andreord:andreord@localhost/andreord', echo=False)
+engine = create_engine('postgresql://andreord@localhost/wordties-dannet', echo=False)
 Session = sessionmaker(bind=engine)
 metadata = MetaData(bind=engine)
 

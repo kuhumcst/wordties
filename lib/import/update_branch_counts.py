@@ -2,7 +2,7 @@ import psycopg2
 import networkx as nx
 import sys
 
-conn = psycopg2.connect("dbname=andreord user=andreord")
+conn = psycopg2.connect("dbname=andreord-dannet-220-b user=andreord")
 cur = conn.cursor()
 
 G=nx.DiGraph()
@@ -19,7 +19,7 @@ G=nx.DiGraph()
 #	G.add_edge(target, src)
 
 # Set imported relations file (csv)
-f=open('/home/seaton/git/andreord-public/lib/import/dan_net_data/relations.csv')	
+f=open('/opt/andreord-dannet/lib/import/dan_net_data/DanNet-2.2_csv/relations.csv')	
 
 for line in f.readlines():
     record = line.split("@")
@@ -49,7 +49,7 @@ for line in f.readlines():
 # Note: Update reference to top-most node before using ie {DN:TOP}
 #top_node = "20633" # set if top node exists
 synset_factor = 1000 # db factoring
-top_node = 20633 # syn_set_id or None
+top_node = '20633' # syn_set_id or None
 
 def traverse(top_node):
 	try:

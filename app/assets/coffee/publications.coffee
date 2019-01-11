@@ -21,12 +21,12 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
             br()
             text 'In: Proceedings of 6th International Global Wordnet Conference pp.254-260. Matsue, Japan.'
       div '#footer', ->
-        a href: 'http://wordties.cst.dk', 'WordTies'
+        a href: '/', 'WordTies'
         text '&nbsp;is developed by&nbsp;'
         a href: 'mailto:anders@johannsen.com', 'Anders Johannsen'
         text '&nbsp;and&nbsp;'
         a href: 'mailto:seaton@hum.ku.dk', 'Mitchell Seaton'
         text '&nbsp;|&nbsp;'
-        a href: 'https://github.com/meaton/andreord-public/tree/metanord_validate', target: '_blank', ->
+        a href: 'https://github.com/kuhumcst/wordties/tree/metanord_validate', target: '_blank', ->
           text 'GitHub'
           br()

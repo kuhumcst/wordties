@@ -1,15 +1,13 @@
 <div style="margin-top: 1em; clear: both"></div>
-<%= link_to image_tag('metanord_logo.small.jpg'), 'http://www.meta-nord.eu/', :target => '_blank', :class => 'logo metanord' %>
-<%= link_to image_tag('metanet_logo.small.jpg'), 'http://www.meta-net.eu/', :target => '_blank', :class => 'logo metanet' %>
 <div class="about">
-	<h3>About Wordnet</h3>
+	<h3>About DanNet</h3>
 	<p>
-	  The conceptual network displayed in this website is based on data from <%= link_to 'DanNet',  'http://wordnet.dk/dannet/lang' %> version 2.1.
+	  The conceptual network displayed in this website is based on data from <%= link_to 'DanNet',  'https://cst.ku.dk/english/projekter/dannet/' %> version 2.2.
 	  The project is a collaboration between <%= link_to 'Center for Sprogteknologi', 'http://cst.ku.dk' %> at University of Copenhagen
 	  and <%= link_to 'Det Danske Sprog- og Litteraturselskab', 'http://dsl.dk/' %>.
 	</p>
 	<p>In total there are registered <%= number_with_delimiter(DanNet::SynSet.count) %> concepts
-which is held in place by <%= number_with_delimiter(DanNet::Relation.count) %> relations.</p>
+which is held in place by <%= number_with_delimiter(DanNet::Relation.count) %> relations, loaded in <i>WordTies</i>.</p>
 	</p>
 	<p>
 	  DanNet's is influenced by the English language <%= link_to 'WordNet', 'http://wordnet.princeton.edu/'%>
@@ -19,4 +17,6 @@ which is held in place by <%= number_with_delimiter(DanNet::Relation.count) %> r
 	<p>
 	The <span class="siteName"><%=t :title, :scope => :application %></span> application is most useful as a utility software for browsing translational links between the different wordnets. Nevertheless, an additional ambition is to facilitate better browsing into the particular wordnets and thereby enable evaluation of  differences in structure and granularity.
 	</p>
+<%= link_to image_tag('metanord_logo.small.jpg'), 'http://www.meta-nord.eu/', :target => '_blank', :class => 'logo metanord' %>
+<%= link_to image_tag('metanet_logo.small.jpg'), 'http://www.meta-net.eu/', :target => '_blank', :class => 'logo metanet' %>
 </div>

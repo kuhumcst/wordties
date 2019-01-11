@@ -63,4 +63,8 @@ Andreord::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
   config.assets.precompile += %w( application.css application-ie.css )
+
+  config.relative_url_root = '/wordties-dannet'
+  Rails.application.routes.default_url_options[:host] = 'wordties.cst.sc.ku.dk'
+
 end
