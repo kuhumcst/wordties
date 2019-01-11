@@ -44,7 +44,7 @@ delimiter = "\t"
 PWN_id = "wordnet30"
 
 # Database session
-engine = create_engine('postgresql://andreord:andreord@localhost/andreord', echo=False)
+engine = create_engine('postgresql://andreord@localhost/andreord-ord', echo=False)
 Session = sessionmaker(bind=engine)
 metadata = MetaData(bind=engine)
 

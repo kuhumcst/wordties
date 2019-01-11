@@ -24,7 +24,7 @@
                 <% end -%> 
             </div>
             <div id="logo">
-              <%= link_to(t(:title, :scope => :application), '/') %>
+              <%= link_to(t(:title, :scope => :application), 'http://andreord.dk') %>
             </div>
             <br style="height:150px; clear:both"/>
           </div>
@@ -38,7 +38,7 @@
               <%= yield %>
           </div>
           <div id="footer">
-              <%= link_to(t(:title, :scope => :application), '/') %> <%= t(:made_by, :scope => :application) %>
+              <%= link_to(t(:title, :scope => :application), 'http://andreord.dk') %> <%= t(:made_by, :scope => :application) %>
               <%=raw [mail_to('anders@johannsen.com', 'Anders Johannsen', :encode => 'javascript'), mail_to('seaton@hum.ku.dk', 'Mitchell Seaton', :encode => 'javascript')].to_sentence %><br/>
 	      <%= t(:data_from, :scope => :application) %> <%= link_to t(:wordnet, :scope => :application), 'http://wordnet.dk' %>
 	  </div>

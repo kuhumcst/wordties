@@ -6,12 +6,9 @@ module Import
   class DanNetImporter
     #include Hirb::Console
 
-    #DATA_DIR = "/home/seaton/git/andreord-public/lib/import/dan_net_data"
-    #DATA_FILE = "#{DATA_DIR}/dannet.zip"
-
-    DATA_DIR = "/home/seaton/git/andreord-public/lib/import/pwn_data/EstWN/EstWNAndreOrd"
-    DATA_FILE = "#{DATA_DIR}/estwn-andreord_import.zip"
-    DATA_URL = "http://devtools1.clarin.dk/andreord-files/estwn-andreord_import.zip"
+    DATA_DIR = "/data/andreord-ord/lib/import/dan_net_data/DanNet-2.2_csv"
+    DATA_FILE = "#{DATA_DIR}/dannet.2.2.zip"
+    DATA_URL = "http://wordnet.dk/dannet/DanNet-2.2_csv.zip"
     UNITS = %w{synsets dummies synset_attributes words wordsenses relations}
 
     REVERSE_RELATIONS = { 'holo' => 'mero', 'hypero' => 'hypo',
