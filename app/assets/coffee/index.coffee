@@ -77,6 +77,6 @@ html xmlns: 'http://www.w3.org/1999/xhtml', ->
         text '&nbsp;and&nbsp;'
         a href: 'mailto:seaton@hum.ku.dk', 'Mitchell Seaton'
         text '&nbsp;|&nbsp;'
-        a href: 'https://github.com/meaton/andreord-public/tree/metanord_validate', target: '_blank', ->
+        a href: 'https://github.com/kuhumcst/wordties', target: '_blank', ->
           text 'GitHub'
           br()
