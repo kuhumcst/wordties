@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Andreord::Application.config.secret_token = 'd8dc3e1ba27aca371be86988ef3d0b8ab933be85802995543d50e2ee4e51839c7c012820e3dcfd2c138a04c96b65d38d0974b81262212e643cb6a017c02130db'
+Andreord::Application.config.secret_token = ENV['SECRET_TOKEN'] || '3e6f623ed52d28a629f8611bf1edec02a8e9d172ac3bb5b2145044a81e57575583ec27d2609bb61b882370034be24b81feddaeb3a7cb31cb253684fa5a21ade2'
