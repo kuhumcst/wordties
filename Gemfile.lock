@@ -47,6 +47,10 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
+    dotenv (2.6.0)
+    dotenv-rails (2.6.0)
+      dotenv (= 2.6.0)
+      railties (>= 3.2, < 6.0)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.10.0)
@@ -134,6 +138,7 @@ DEPENDENCIES
   call-me (~> 0.0.2.2)
   capistrano
   coffee-rails (~> 3.2.1)
+  dotenv-rails
   execjs
   pg (~> 0.11)
   rails (>= 3.2.1)
